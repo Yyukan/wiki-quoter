@@ -16,6 +16,10 @@
 		F45F3FF3156EAE610077D01C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45F3FF1156EAE610077D01C /* ViewController.m */; };
 		F45F3FF9156EAEE20077D01C /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FF5156EAEE20077D01C /* ViewController_iPad.xib */; };
 		F45F3FFA156EAEE20077D01C /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FF7156EAEE20077D01C /* ViewController_iPhone.xib */; };
+		F45F4000156EC1F30077D01C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FFF156EC1F30077D01C /* Icon.png */; };
+		F45F4003156EC1FE0077D01C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4002156EC1FE0077D01C /* Icon@2x.png */; };
+		F45F4005156EC20D0077D01C /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4004156EC20D0077D01C /* Icon72.png */; };
+		F45F4008156EC2730077D01C /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4007156EC2730077D01C /* Icon512.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		F45F3FF1156EAE610077D01C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F45F3FF6156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
 		F45F3FF8156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		F45F3FFF156EC1F30077D01C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
+		F45F4002156EC1FE0077D01C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
+		F45F4004156EC20D0077D01C /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = ../Icon72.png; sourceTree = "<group>"; };
+		F45F4007156EC2730077D01C /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon512.png; path = ../Icon512.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 		F45F3FD2156EACD90077D01C /* WikiQuote */ = {
 			isa = PBXGroup;
 			children = (
+				F45F4006156EC2220077D01C /* Icons */,
 				F45F3FF4156EAEC80077D01C /* Xibs */,
 				F45F3FEC156EAE610077D01C /* Classes */,
 				F45F3FD3156EACD90077D01C /* Supporting Files */,
@@ -123,6 +132,17 @@
 				F45F3FF7156EAEE20077D01C /* ViewController_iPhone.xib */,
 			);
 			name = Xibs;
+			sourceTree = "<group>";
+		};
+		F45F4006156EC2220077D01C /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				F45F4007156EC2730077D01C /* Icon512.png */,
+				F45F4002156EC1FE0077D01C /* Icon@2x.png */,
+				F45F4004156EC20D0077D01C /* Icon72.png */,
+				F45F3FFF156EC1F30077D01C /* Icon.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,6 +199,10 @@
 				F45F3FD7156EACD90077D01C /* InfoPlist.strings in Resources */,
 				F45F3FF9156EAEE20077D01C /* ViewController_iPad.xib in Resources */,
 				F45F3FFA156EAEE20077D01C /* ViewController_iPhone.xib in Resources */,
+				F45F4000156EC1F30077D01C /* Icon.png in Resources */,
+				F45F4003156EC1FE0077D01C /* Icon@2x.png in Resources */,
+				F45F4005156EC20D0077D01C /* Icon72.png in Resources */,
+				F45F4008156EC2730077D01C /* Icon512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +335,7 @@
 				F45F3FEB156EACD90077D01C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
