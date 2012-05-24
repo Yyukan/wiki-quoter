@@ -20,6 +20,8 @@
 		F45F4003156EC1FE0077D01C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4002156EC1FE0077D01C /* Icon@2x.png */; };
 		F45F4005156EC20D0077D01C /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4004156EC20D0077D01C /* Icon72.png */; };
 		F45F4008156EC2730077D01C /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4007156EC2730077D01C /* Icon512.png */; };
+		F45F400A156EC7510077D01C /* vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4009156EC7510077D01C /* vertical.png */; };
+		F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45F400F156ED94D0077D01C /* Philosopher.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		F45F4002156EC1FE0077D01C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		F45F4004156EC20D0077D01C /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = ../Icon72.png; sourceTree = "<group>"; };
 		F45F4007156EC2730077D01C /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon512.png; path = ../Icon512.png; sourceTree = "<group>"; };
+		F45F4009156EC7510077D01C /* vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vertical.png; sourceTree = "<group>"; };
+		F45F400F156ED94D0077D01C /* Philosopher.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Philosopher.otf; path = Resources/Philosopher.otf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,7 @@
 		F45F3FBD156EACD90077D01C = {
 			isa = PBXGroup;
 			children = (
+				F45F4009156EC7510077D01C /* vertical.png */,
 				F45F3FD2156EACD90077D01C /* WikiQuote */,
 				F45F3FCB156EACD90077D01C /* Frameworks */,
 				F45F3FC9156EACD90077D01C /* Products */,
@@ -87,6 +92,7 @@
 		F45F3FD2156EACD90077D01C /* WikiQuote */ = {
 			isa = PBXGroup;
 			children = (
+				F45F4012156ED9580077D01C /* Fonts */,
 				F45F4006156EC2220077D01C /* Icons */,
 				F45F3FF4156EAEC80077D01C /* Xibs */,
 				F45F3FEC156EAE610077D01C /* Classes */,
@@ -143,6 +149,14 @@
 				F45F3FFF156EC1F30077D01C /* Icon.png */,
 			);
 			name = Icons;
+			sourceTree = "<group>";
+		};
+		F45F4012156ED9580077D01C /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F45F400F156ED94D0077D01C /* Philosopher.otf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +217,8 @@
 				F45F4003156EC1FE0077D01C /* Icon@2x.png in Resources */,
 				F45F4005156EC20D0077D01C /* Icon72.png in Resources */,
 				F45F4008156EC2730077D01C /* Icon512.png in Resources */,
+				F45F400A156EC7510077D01C /* vertical.png in Resources */,
+				F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
