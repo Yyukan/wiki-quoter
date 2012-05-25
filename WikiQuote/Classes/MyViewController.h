@@ -12,8 +12,8 @@
 {
     UIImageView *imageView;
     int pageNumber;
+    
 }
-
 
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 

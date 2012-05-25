@@ -41,7 +41,8 @@ static NSArray *__pageControlColorList = nil;
 // Set the label and background color when the view has finished loading.
 - (void)viewDidLoad {
     //pageNumberLabel.text = [NSString stringWithFormat:@"Page %d", pageNumber + 1];
-    self.view.backgroundColor = [MyViewController pageControlColorWithIndex:pageNumber];
+    self.view.backgroundColor = [UIColor clearColor];
+    //[MyViewController pageControlColorWithIndex:pageNumber];
 }
 
 @end

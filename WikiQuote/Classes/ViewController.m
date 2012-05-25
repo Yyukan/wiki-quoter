@@ -22,6 +22,14 @@ static NSUInteger kNumberOfPages = 7;
 
 @synthesize scrollView, viewControllers;
 
+
+- (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
+{
+	UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:image]];
+    view.backgroundColor = background;
+    [background release];
+}
+
 /*
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  */
@@ -53,7 +61,11 @@ static NSUInteger kNumberOfPages = 7;
     // load the page on either side to avoid flashes when the user starts scrolling
     [self loadScrollViewWithPage:0];
     [self loadScrollViewWithPage:1];
+    
+    [self setBackgroundImage:self.view image:@"background@2x.png"];
 }
+
+
 
 - (void)loadScrollViewWithPage:(int)page {
     if (page < 0) return;
