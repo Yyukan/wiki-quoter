@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F429369D156FEF2B0034F723 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429369C156FEF2B0034F723 /* MyViewController.m */; };
+		F42936A0156FF0250034F723 /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* MyViewController.xib */; };
 		F45F3FCD156EACD90077D01C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCC156EACD90077D01C /* UIKit.framework */; };
 		F45F3FCF156EACD90077D01C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCE156EACD90077D01C /* Foundation.framework */; };
 		F45F3FD1156EACD90077D01C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FD0156EACD90077D01C /* CoreGraphics.framework */; };
@@ -25,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F429369B156FEF2B0034F723 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
+		F429369C156FEF2B0034F723 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
+		F429369F156FF0250034F723 /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
 		F45F3FC8156EACD90077D01C /* WikiQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45F3FCC156EACD90077D01C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F45F3FCE156EACD90077D01C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -120,6 +125,8 @@
 				F45F3FEE156EAE610077D01C /* AppDelegate.m */,
 				F45F3FF0156EAE610077D01C /* ViewController.h */,
 				F45F3FF1156EAE610077D01C /* ViewController.m */,
+				F429369B156FEF2B0034F723 /* MyViewController.h */,
+				F429369C156FEF2B0034F723 /* MyViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -136,6 +143,7 @@
 			children = (
 				F45F3FF5156EAEE20077D01C /* ViewController_iPad.xib */,
 				F45F3FF7156EAEE20077D01C /* ViewController_iPhone.xib */,
+				F429369F156FF0250034F723 /* MyViewController.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -219,6 +227,7 @@
 				F45F4008156EC2730077D01C /* Icon512.png in Resources */,
 				F45F400A156EC7510077D01C /* vertical.png in Resources */,
 				F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */,
+				F42936A0156FF0250034F723 /* MyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +241,7 @@
 				F45F3FD9156EACD90077D01C /* main.m in Sources */,
 				F45F3FF2156EAE610077D01C /* AppDelegate.m in Sources */,
 				F45F3FF3156EAE610077D01C /* ViewController.m in Sources */,
+				F429369D156FEF2B0034F723 /* MyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
