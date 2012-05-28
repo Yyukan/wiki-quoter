@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "MyViewController.h"
 
-static NSUInteger kNumberOfPages = 7;
+static NSUInteger kNumberOfPages = 3;
 
 @interface ViewController (PrivateMethods)
 
@@ -52,6 +52,7 @@ static NSUInteger kNumberOfPages = 7;
     scrollView.showsVerticalScrollIndicator = NO;
     scrollView.scrollsToTop = NO;
     scrollView.delegate = self;
+    scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
     
     pageControl.numberOfPages = kNumberOfPages;
     pageControl.currentPage = 0;

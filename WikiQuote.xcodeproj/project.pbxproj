@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		F429369D156FEF2B0034F723 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429369C156FEF2B0034F723 /* MyViewController.m */; };
 		F42936A0156FF0250034F723 /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* MyViewController.xib */; };
-		F42936A7156FF6970034F723 /* v_background_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A3156FF6970034F723 /* v_background_iphone.png */; };
 		F42936A8156FF6970034F723 /* v_frame_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A6156FF6970034F723 /* v_frame_iphone.png */; };
 		F42936AA156FFA070034F723 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A9156FFA070034F723 /* background@2x.png */; };
 		F45F3FCD156EACD90077D01C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCC156EACD90077D01C /* UIKit.framework */; };
@@ -33,7 +32,6 @@
 		F429369B156FEF2B0034F723 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		F429369C156FEF2B0034F723 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		F429369F156FF0250034F723 /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
-		F42936A3156FF6970034F723 /* v_background_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_background_iphone.png; sourceTree = "<group>"; };
 		F42936A6156FF6970034F723 /* v_frame_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_frame_iphone.png; sourceTree = "<group>"; };
 		F42936A9156FFA070034F723 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		F45F3FC8156EACD90077D01C /* WikiQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				F42936A9156FFA070034F723 /* background@2x.png */,
-				F42936A3156FF6970034F723 /* v_background_iphone.png */,
 			);
 			path = Backgrounds;
 			sourceTree = "<group>";
@@ -269,7 +266,6 @@
 				F45F400A156EC7510077D01C /* vertical.png in Resources */,
 				F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */,
 				F42936A0156FF0250034F723 /* MyViewController.xib in Resources */,
-				F42936A7156FF6970034F723 /* v_background_iphone.png in Resources */,
 				F42936A8156FF6970034F723 /* v_frame_iphone.png in Resources */,
 				F42936AA156FFA070034F723 /* background@2x.png in Resources */,
 			);

@@ -12,13 +12,13 @@ static NSArray *__pageControlColorList = nil;
 
 @implementation MyViewController
 
-@synthesize imageView;
+@synthesize imageView, label, textView;
 
 // Creates the color list the first time this method is invoked. Returns one color object from the list.
 + (UIColor *)pageControlColorWithIndex:(NSUInteger)index {
     if (__pageControlColorList == nil) {
         __pageControlColorList = [[NSArray alloc] initWithObjects:[UIColor redColor], [UIColor greenColor], [UIColor magentaColor],
-                                  [UIColor blueColor], [UIColor orangeColor], [UIColor brownColor], [UIColor grayColor], nil];
+                                   nil];
     }
     
     // Mod the index by the list length to ensure access remains in bounds.
@@ -42,6 +42,14 @@ static NSArray *__pageControlColorList = nil;
 - (void)viewDidLoad {
     //pageNumberLabel.text = [NSString stringWithFormat:@"Page %d", pageNumber + 1];
     self.view.backgroundColor = [UIColor clearColor];
+    
+    self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
+
+    self.label.text = @"Антон Павлович Чехов";
+
+    self.textView.font = [UIFont fontWithName:@"Philosopher" size:32];
+    self.textView.text = @"Чем короче и реже ты пишешь, тем больше и чаще тебя печатают.";
+    
     //[MyViewController pageControlColorWithIndex:pageNumber];
 }
 
