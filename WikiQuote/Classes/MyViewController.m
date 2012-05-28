@@ -7,6 +7,7 @@
 //
 
 #import "MyViewController.h"
+#import "WikiQuoter.h"
 
 static NSArray *__pageControlColorList = nil;
 
@@ -43,13 +44,21 @@ static NSArray *__pageControlColorList = nil;
     //pageNumberLabel.text = [NSString stringWithFormat:@"Page %d", pageNumber + 1];
     self.view.backgroundColor = [UIColor clearColor];
     
+    WikiQuoter *quoter = [WikiQuoter new];
+    Quote * quote = [[quoter getRandom] retain];
+    
+    [quoter release];
+    
+    
     self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
 
-    self.label.text = @"Антон Павлович Чехов";
+    self.label.text = [quote author];
 
     self.textView.font = [UIFont fontWithName:@"Philosopher" size:32];
-    self.textView.text = @"Чем короче и реже ты пишешь, тем больше и чаще тебя печатают.";
+    self.textView.text = [quote text];
+
     
+    [quote release];
     //[MyViewController pageControlColorWithIndex:pageNumber];
 }
 
