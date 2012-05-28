@@ -25,6 +25,7 @@
 		F45F4005156EC20D0077D01C /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4004156EC20D0077D01C /* Icon72.png */; };
 		F45F4008156EC2730077D01C /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4007156EC2730077D01C /* Icon512.png */; };
 		F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45F400F156ED94D0077D01C /* Philosopher.otf */; };
+		F4DEDF681574006500BD77CB /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF671574006500BD77CB /* Logger.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,8 @@
 		F45F4004156EC20D0077D01C /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = ../Icon72.png; sourceTree = "<group>"; };
 		F45F4007156EC2730077D01C /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon512.png; path = ../Icon512.png; sourceTree = "<group>"; };
 		F45F400F156ED94D0077D01C /* Philosopher.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Philosopher.otf; path = Resources/Philosopher.otf; sourceTree = "<group>"; };
+		F4DEDF661574006500BD77CB /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		F4DEDF671574006500BD77CB /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 		F45F3FEF156EAE610077D01C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F4DEDF661574006500BD77CB /* Logger.h */,
+				F4DEDF671574006500BD77CB /* Logger.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -278,6 +283,7 @@
 				F45F3FF2156EAE610077D01C /* AppDelegate.m in Sources */,
 				F45F3FF3156EAE610077D01C /* ViewController.m in Sources */,
 				F429369D156FEF2B0034F723 /* MyViewController.m in Sources */,
+				F4DEDF681574006500BD77CB /* Logger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
