@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		F420AA2315767F5800CE9DC8 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F420AA2115767F5800CE9DC8 /* StringUtils.m */; };
-		F429369D156FEF2B0034F723 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429369C156FEF2B0034F723 /* MyViewController.m */; };
-		F42936A0156FF0250034F723 /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* MyViewController.xib */; };
+		F429369D156FEF2B0034F723 /* QuoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429369C156FEF2B0034F723 /* QuoteViewController.m */; };
+		F42936A0156FF0250034F723 /* QuoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* QuoteViewController.xib */; };
 		F42936A8156FF6970034F723 /* v_frame_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A6156FF6970034F723 /* v_frame_iphone.png */; };
 		F42936AA156FFA070034F723 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A9156FFA070034F723 /* background@2x.png */; };
 		F45F3FCD156EACD90077D01C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCC156EACD90077D01C /* UIKit.framework */; };
@@ -18,9 +18,9 @@
 		F45F3FD7156EACD90077D01C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FD5156EACD90077D01C /* InfoPlist.strings */; };
 		F45F3FD9156EACD90077D01C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F45F3FD8156EACD90077D01C /* main.m */; };
 		F45F3FF2156EAE610077D01C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F45F3FEE156EAE610077D01C /* AppDelegate.m */; };
-		F45F3FF3156EAE610077D01C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45F3FF1156EAE610077D01C /* ViewController.m */; };
-		F45F3FF9156EAEE20077D01C /* ViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FF5156EAEE20077D01C /* ViewController_iPad.xib */; };
-		F45F3FFA156EAEE20077D01C /* ViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FF7156EAEE20077D01C /* ViewController_iPhone.xib */; };
+		F45F3FF3156EAE610077D01C /* InfinityPagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F45F3FF1156EAE610077D01C /* InfinityPagesViewController.m */; };
+		F45F3FF9156EAEE20077D01C /* InfinityPagesViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FF5156EAEE20077D01C /* InfinityPagesViewController_iPad.xib */; };
+		F45F3FFA156EAEE20077D01C /* InfinityPagesViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FF7156EAEE20077D01C /* InfinityPagesViewController_iPhone.xib */; };
 		F45F4000156EC1F30077D01C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F3FFF156EC1F30077D01C /* Icon.png */; };
 		F45F4003156EC1FE0077D01C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4002156EC1FE0077D01C /* Icon@2x.png */; };
 		F45F4005156EC20D0077D01C /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4004156EC20D0077D01C /* Icon72.png */; };
@@ -36,9 +36,9 @@
 		F420AA2015767F5800CE9DC8 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		F420AA2115767F5800CE9DC8 /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
 		F420AA2215767F5800CE9DC8 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		F429369B156FEF2B0034F723 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
-		F429369C156FEF2B0034F723 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
-		F429369F156FF0250034F723 /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
+		F429369B156FEF2B0034F723 /* QuoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = QuoteViewController.h; sourceTree = "<group>"; };
+		F429369C156FEF2B0034F723 /* QuoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteViewController.m; sourceTree = "<group>"; };
+		F429369F156FF0250034F723 /* QuoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuoteViewController.xib; sourceTree = "<group>"; };
 		F42936A6156FF6970034F723 /* v_frame_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_frame_iphone.png; sourceTree = "<group>"; };
 		F42936A9156FFA070034F723 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		F45F3FC8156EACD90077D01C /* WikiQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,10 +51,10 @@
 		F45F3FDA156EACD90077D01C /* WikiQuote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WikiQuote-Prefix.pch"; sourceTree = "<group>"; };
 		F45F3FED156EAE610077D01C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F45F3FEE156EAE610077D01C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F45F3FF0156EAE610077D01C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		F45F3FF1156EAE610077D01C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		F45F3FF6156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPad.xib; sourceTree = "<group>"; };
-		F45F3FF8156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController_iPhone.xib; sourceTree = "<group>"; };
+		F45F3FF0156EAE610077D01C /* InfinityPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = InfinityPagesViewController.h; sourceTree = "<group>"; };
+		F45F3FF1156EAE610077D01C /* InfinityPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfinityPagesViewController.m; sourceTree = "<group>"; };
+		F45F3FF6156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfinityPagesViewController_iPad.xib; sourceTree = "<group>"; };
+		F45F3FF8156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfinityPagesViewController_iPhone.xib; sourceTree = "<group>"; };
 		F45F3FFF156EC1F30077D01C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		F45F4002156EC1FE0077D01C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 		F45F4004156EC20D0077D01C /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = ../Icon72.png; sourceTree = "<group>"; };
@@ -174,10 +174,10 @@
 				F45F3FEF156EAE610077D01C /* Utils */,
 				F45F3FED156EAE610077D01C /* AppDelegate.h */,
 				F45F3FEE156EAE610077D01C /* AppDelegate.m */,
-				F45F3FF0156EAE610077D01C /* ViewController.h */,
-				F45F3FF1156EAE610077D01C /* ViewController.m */,
-				F429369B156FEF2B0034F723 /* MyViewController.h */,
-				F429369C156FEF2B0034F723 /* MyViewController.m */,
+				F45F3FF0156EAE610077D01C /* InfinityPagesViewController.h */,
+				F45F3FF1156EAE610077D01C /* InfinityPagesViewController.m */,
+				F429369B156FEF2B0034F723 /* QuoteViewController.h */,
+				F429369C156FEF2B0034F723 /* QuoteViewController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -198,9 +198,9 @@
 		F45F3FF4156EAEC80077D01C /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
-				F45F3FF5156EAEE20077D01C /* ViewController_iPad.xib */,
-				F45F3FF7156EAEE20077D01C /* ViewController_iPhone.xib */,
-				F429369F156FF0250034F723 /* MyViewController.xib */,
+				F45F3FF5156EAEE20077D01C /* InfinityPagesViewController_iPad.xib */,
+				F45F3FF7156EAEE20077D01C /* InfinityPagesViewController_iPhone.xib */,
+				F429369F156FF0250034F723 /* QuoteViewController.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -288,14 +288,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F45F3FD7156EACD90077D01C /* InfoPlist.strings in Resources */,
-				F45F3FF9156EAEE20077D01C /* ViewController_iPad.xib in Resources */,
-				F45F3FFA156EAEE20077D01C /* ViewController_iPhone.xib in Resources */,
+				F45F3FF9156EAEE20077D01C /* InfinityPagesViewController_iPad.xib in Resources */,
+				F45F3FFA156EAEE20077D01C /* InfinityPagesViewController_iPhone.xib in Resources */,
 				F45F4000156EC1F30077D01C /* Icon.png in Resources */,
 				F45F4003156EC1FE0077D01C /* Icon@2x.png in Resources */,
 				F45F4005156EC20D0077D01C /* Icon72.png in Resources */,
 				F45F4008156EC2730077D01C /* Icon512.png in Resources */,
 				F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */,
-				F42936A0156FF0250034F723 /* MyViewController.xib in Resources */,
+				F42936A0156FF0250034F723 /* QuoteViewController.xib in Resources */,
 				F42936A8156FF6970034F723 /* v_frame_iphone.png in Resources */,
 				F42936AA156FFA070034F723 /* background@2x.png in Resources */,
 			);
@@ -310,8 +310,8 @@
 			files = (
 				F45F3FD9156EACD90077D01C /* main.m in Sources */,
 				F45F3FF2156EAE610077D01C /* AppDelegate.m in Sources */,
-				F45F3FF3156EAE610077D01C /* ViewController.m in Sources */,
-				F429369D156FEF2B0034F723 /* MyViewController.m in Sources */,
+				F45F3FF3156EAE610077D01C /* InfinityPagesViewController.m in Sources */,
+				F429369D156FEF2B0034F723 /* QuoteViewController.m in Sources */,
 				F4DEDF681574006500BD77CB /* Logger.m in Sources */,
 				F4DEDF6B15740F4200BD77CB /* Quote.m in Sources */,
 				F4DEDF721574136100BD77CB /* WikiQuoter.m in Sources */,
@@ -330,20 +330,20 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		F45F3FF5156EAEE20077D01C /* ViewController_iPad.xib */ = {
+		F45F3FF5156EAEE20077D01C /* InfinityPagesViewController_iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F45F3FF6156EAEE20077D01C /* en */,
 			);
-			name = ViewController_iPad.xib;
+			name = InfinityPagesViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
-		F45F3FF7156EAEE20077D01C /* ViewController_iPhone.xib */ = {
+		F45F3FF7156EAEE20077D01C /* InfinityPagesViewController_iPhone.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				F45F3FF8156EAEE20077D01C /* en */,
 			);
-			name = ViewController_iPhone.xib;
+			name = InfinityPagesViewController_iPhone.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
