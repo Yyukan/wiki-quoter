@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F420AA2315767F5800CE9DC8 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F420AA2115767F5800CE9DC8 /* StringUtils.m */; };
 		F429369D156FEF2B0034F723 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429369C156FEF2B0034F723 /* MyViewController.m */; };
 		F42936A0156FF0250034F723 /* MyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* MyViewController.xib */; };
 		F42936A8156FF6970034F723 /* v_frame_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A6156FF6970034F723 /* v_frame_iphone.png */; };
@@ -31,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F420AA1F15767F5800CE9DC8 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		F420AA2015767F5800CE9DC8 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
+		F420AA2115767F5800CE9DC8 /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
+		F420AA2215767F5800CE9DC8 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		F429369B156FEF2B0034F723 /* MyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyViewController.h; sourceTree = "<group>"; };
 		F429369C156FEF2B0034F723 /* MyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyViewController.m; sourceTree = "<group>"; };
 		F429369F156FF0250034F723 /* MyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyViewController.xib; sourceTree = "<group>"; };
@@ -180,6 +185,10 @@
 		F45F3FEF156EAE610077D01C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F420AA1F15767F5800CE9DC8 /* Common.h */,
+				F420AA2015767F5800CE9DC8 /* StringUtils.h */,
+				F420AA2115767F5800CE9DC8 /* StringUtils.m */,
+				F420AA2215767F5800CE9DC8 /* SynthesizeSingleton.h */,
 				F4DEDF661574006500BD77CB /* Logger.h */,
 				F4DEDF671574006500BD77CB /* Logger.m */,
 			);
@@ -306,6 +315,7 @@
 				F4DEDF681574006500BD77CB /* Logger.m in Sources */,
 				F4DEDF6B15740F4200BD77CB /* Quote.m in Sources */,
 				F4DEDF721574136100BD77CB /* WikiQuoter.m in Sources */,
+				F420AA2315767F5800CE9DC8 /* StringUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

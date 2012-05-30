@@ -7,8 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Common.h"
 #import "Quoter.h"
 
 @interface WikiQuoter : NSObject <Quoter>
+{
+    NSArray *_quotes;  
+    int _currentQuote;
+}
+@property (nonatomic, retain) NSArray *quotes;
+
++ (WikiQuoter *) sharedWikiQuoter;
+
+- (Quote *) getByIndex:(int) index;
 
 @end

@@ -7,16 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyViewController.h"
 
 @interface ViewController : UIViewController<UIScrollViewDelegate>
 {
-    UIScrollView *scrollView;
-    UIPageControl *pageControl;
+    UIScrollView *_scrollView;
     
-    BOOL pageControlUsed;
+    MyViewController *_previosView;
+    MyViewController *_currentView;
+    MyViewController *_nextView;
+    
+    int _previosIndex;
+	int _currentIndex;
+	int _nextIndex;
 }
 
+@property (nonatomic, retain) MyViewController *previosView;
+@property (nonatomic, retain) MyViewController *currentView;
+@property (nonatomic, retain) MyViewController *nextView;
+@property (nonatomic, assign) int previosIndex;
+@property (nonatomic, assign) int currentIndex;
+@property (nonatomic, assign) int nextIndex;
+
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, retain) NSMutableArray *viewControllers;
 
 @end

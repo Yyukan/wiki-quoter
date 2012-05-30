@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WikiQuoter.h"
 
 @interface MyViewController : UIViewController
 {
     UIImageView *imageView;
     int pageNumber;
-    
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *label;
@@ -20,5 +20,7 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 
 - (id)initWithPageNumber:(int)page;
+
+- (void) updateByIndex:(int) index;
 
 @end

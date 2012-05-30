@@ -23,4 +23,6 @@
 
 - (id)initWithText:(NSString*)text author:(NSString*)author url:(NSString*)url description:(NSString*)description;
 
++ (Quote *) quoteWithText:(NSString *)text fromAuthor:(NSString *)author;
+
 @end

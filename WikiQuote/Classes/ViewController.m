@@ -7,21 +7,18 @@
 //
 
 #import "ViewController.h"
-#import "MyViewController.h"
-
-static NSUInteger kNumberOfPages = 3;
-
-@interface ViewController (PrivateMethods)
-
-- (void)loadScrollViewWithPage:(int)page;
-- (void)scrollViewDidScroll:(UIScrollView *)sender;
-
-@end
 
 @implementation ViewController
 
-@synthesize scrollView, viewControllers;
+@synthesize scrollView = _scrollView;
 
+@synthesize previosView = _previosView;
+@synthesize currentView = _currentView;
+@synthesize nextView = _nextView;
+
+@synthesize previosIndex = _previosIndex;
+@synthesize currentIndex = _currentIndex;
+@synthesize nextIndex = _nextIndex;
 
 - (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
 {
@@ -30,123 +27,146 @@ static NSUInteger kNumberOfPages = 3;
     [background release];
 }
 
+- (MyViewController *) createViewController:(int)page
+{
+    MyViewController *controller = [[MyViewController alloc] initWithPageNumber:0];
+    CGRect frame = _scrollView.frame;
+    frame.origin.x = frame.size.width * page;
+    frame.origin.y = 0;
+    controller.view.frame = frame;
+    return [controller autorelease];
+}
+
+- (void)loadPageWithId:(int)index onPage:(int)page {
+	// load data for page
+	switch (page) {
+		case 0:
+			[self.previosView updateByIndex:index];
+			break;
+		case 1:
+            [self.currentView updateByIndex:index];
+			break;
+		case 2:
+            [self.nextView updateByIndex:index];
+			break;
+	}	
+}
+
 /*
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  */
-- (void)viewDidLoad {
+- (void)viewDidLoad 
+{
     [super viewDidLoad];
     
-    // view controllers are created lazily
-    // in the meantime, load the array with placeholders which will be replaced on demand
-    NSMutableArray *controllers = [[NSMutableArray alloc] init];
-    for (unsigned i = 0; i < kNumberOfPages; i++) {
-        [controllers addObject:[NSNull null]];
-    }
-    self.viewControllers = controllers;
-    [controllers release];
+    // create placeholders for each of our documents
+	self.previosView = [self createViewController:0];
+	self.currentView = [self createViewController:1];
+	self.nextView = [self createViewController:2];
+
+    _scrollView.pagingEnabled = YES;
+    _scrollView.showsHorizontalScrollIndicator = NO;
+    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.delegate = self;
+
+    [_scrollView addSubview:_previosView.view];
+	[_scrollView addSubview:_currentView.view];
+	[_scrollView addSubview:_nextView.view];
     
-    // a page is the width of the scroll view
-    scrollView.pagingEnabled = YES;
-    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * kNumberOfPages, scrollView.frame.size.height);
-    scrollView.showsHorizontalScrollIndicator = NO;
-    scrollView.showsVerticalScrollIndicator = NO;
-    scrollView.scrollsToTop = NO;
-    scrollView.delegate = self;
-    scrollView.contentOffset = CGPointMake(scrollView.frame.size.width, 0);
-    
-    pageControl.numberOfPages = kNumberOfPages;
-    pageControl.currentPage = 0;
-    
-    // pages are created on demand
-    // load the visible page
-    // load the page on either side to avoid flashes when the user starts scrolling
-    [self loadScrollViewWithPage:0];
-    [self loadScrollViewWithPage:1];
+    [self loadPageWithId:9 onPage:0];
+	[self loadPageWithId:0 onPage:1];
+	[self loadPageWithId:1 onPage:2];
     
     [self setBackgroundImage:self.view image:@"background@2x.png"];
+
+    // adjust content size for three pages
+	[_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width * 3, _scrollView.frame.size.height)];	
+    
+    // reposition to central page
+	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)sender {     
+	// All data for the documents are stored in an array (documentTitles).     
+	// We keep track of the index that we are scrolling to so that we     
+	// know what data to load for each page.     
+	if(_scrollView.contentOffset.x > _scrollView.frame.size.width) 
+    {
+        TRC_DBG(@"We are moving forward ");
+		// We are moving forward. Load the current doc data on the first page.         
+		[self loadPageWithId:_currentIndex onPage:0];         
+        
+		// Add one to the currentIndex or reset to 0 if we have reached the end.         
+		_currentIndex = (_currentIndex >= 100) ? 0 : _currentIndex + 1;         
+        
+		[self loadPageWithId:_currentIndex onPage:1];         
+        
+		// Load content on the last page. This is either from the next item in the array         
+		// or the first if we have reached the end.         
+        
+		_nextIndex = (_currentIndex >= 100) ? 0 : _currentIndex + 1;         
+		[self loadPageWithId:_nextIndex onPage:2];
+        
+	}     
+	if(_scrollView.contentOffset.x < _scrollView.frame.size.width) {         
+        TRC_DBG(@"We are moving backward ");
+
+		// We are moving backward. Load the current doc data on the last page.         
+		[self loadPageWithId:_currentIndex onPage:2];         
+        
+		// Subtract one from the currentIndex or go to the end if we have reached the beginning.         
+		_currentIndex = (_currentIndex == 0) ? 100 : _currentIndex - 1;         
+		[self loadPageWithId:_currentIndex onPage:1]; 
+        
+		// Load content on the first page. This is either from the prev item in the array         
+		// or the last if we have reached the beginning.
+        
+		_previosIndex = (_currentIndex == 0) ? 100 : _currentIndex - 1;         
+
+		[self loadPageWithId:_previosIndex onPage:0];     
+	}     
+	
+	// Reset offset back to middle page     
+	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
 }
 
 
 
-- (void)loadScrollViewWithPage:(int)page {
-    if (page < 0) return;
-    if (page >= kNumberOfPages) return;
-    
-    // replace the placeholder if necessary
-    MyViewController *controller = [viewControllers objectAtIndex:page];
-    if ((NSNull *)controller == [NSNull null]) {
-        controller = [[MyViewController alloc] initWithPageNumber:page];
-        [viewControllers replaceObjectAtIndex:page withObject:controller];
-        [controller release];
-    }
-    
-    // add the controller's view to the scroll view
-    if (nil == controller.view.superview) {
-        CGRect frame = scrollView.frame;
-        frame.origin.x = frame.size.width * page;
-        frame.origin.y = 0;
-        controller.view.frame = frame;
-        [scrollView addSubview:controller.view];
-    }
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)sender {
+//- (void)scrollViewDidScroll:(UIScrollView *)sender {
     // We don't want a "feedback loop" between the UIPageControl and the scroll delegate in
     // which a scroll event generated from the user hitting the page control triggers updates from
     // the delegate method. We use a boolean to disable the delegate logic when the page control is used.
-    if (pageControlUsed) {
+    //if (pageControlUsed) {
         // do nothing - the scroll was initiated from the page control, not the user dragging
-        return;
-    }
+    //    return;
+    //}
     
     // Switch the indicator when more than 50% of the previous/next page is visible
-    CGFloat pageWidth = scrollView.frame.size.width;
-    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-    pageControl.currentPage = page;
-    
-    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
+//    CGFloat pageWidth = scrollView.frame.size.width;
+//    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+//    //pageControl.currentPage = page;
+//
+//    TRC_DBG(@"Current page %i", page);
+//    
+//    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
+//    [self loadScrollViewWithPage:page - 1];
+//    [self loadScrollViewWithPage:page];
+//    [self loadScrollViewWithPage:page + 1];
     
     // A possible optimization would be to unload the views+controllers which are no longer visible
-}
+//}
 
 // At the begin of scroll dragging, reset the boolean used when scrolls originate from the UIPageControl
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    pageControlUsed = NO;
+    TRC_ENTRY
+    //pageControlUsed = NO;
 }
 
 // At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    pageControlUsed = NO;
-}
-
-- (IBAction)changePage:(id)sender {
-    int page = pageControl.currentPage;
-    
-    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-    [self loadScrollViewWithPage:page - 1];
-    [self loadScrollViewWithPage:page];
-    [self loadScrollViewWithPage:page + 1];
-    
-    // update the scroll view to the appropriate page
-    CGRect frame = scrollView.frame;
-    frame.origin.x = frame.size.width * page;
-    frame.origin.y = 0;
-    [scrollView scrollRectToVisible:frame animated:YES];
-    
-    // Set the boolean used when scrolls originate from the UIPageControl. See scrollViewDidScroll: above.
-    pageControlUsed = YES;
-}
-
-/*
- // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
- // Return YES for supported orientations
- return (interfaceOrientation == UIInterfaceOrientationPortrait);
- }
- */
+//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+//    TRC_ENTRY
+//    //pageControlUsed = NO;
+//}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -161,10 +181,12 @@ static NSUInteger kNumberOfPages = 3;
 }
 
 
-- (void)dealloc {
-    [viewControllers release];
-    [scrollView release];
-    [pageControl release];
+- (void)dealloc 
+{
+    [_previosView release];
+    [_currentView release];
+    [_nextView release];
+    [_scrollView release];
     [super dealloc];
 }
 

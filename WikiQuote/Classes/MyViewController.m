@@ -7,9 +7,8 @@
 //
 
 #import "MyViewController.h"
+#import "Common.h"
 #import "WikiQuoter.h"
-
-static NSArray *__pageControlColorList = nil;
 
 @implementation MyViewController
 
@@ -17,13 +16,7 @@ static NSArray *__pageControlColorList = nil;
 
 // Creates the color list the first time this method is invoked. Returns one color object from the list.
 + (UIColor *)pageControlColorWithIndex:(NSUInteger)index {
-    if (__pageControlColorList == nil) {
-        __pageControlColorList = [[NSArray alloc] initWithObjects:[UIColor redColor], [UIColor greenColor], [UIColor magentaColor],
-                                   nil];
-    }
-    
-    // Mod the index by the list length to ensure access remains in bounds.
-    return [__pageControlColorList objectAtIndex:index % [__pageControlColorList count]];
+    return [UIColor greenColor];
 }
 
 // Load the view nib and initialize the pageNumber ivar.
@@ -41,25 +34,28 @@ static NSArray *__pageControlColorList = nil;
 
 // Set the label and background color when the view has finished loading.
 - (void)viewDidLoad {
-    //pageNumberLabel.text = [NSString stringWithFormat:@"Page %d", pageNumber + 1];
     self.view.backgroundColor = [UIColor clearColor];
     
-    WikiQuoter *quoter = [WikiQuoter new];
-    Quote * quote = [[quoter getRandom] retain];
-    
-    [quoter release];
     
     
+//    Quote * quote = [[WikiQuoter sharedWikiQuoter] getRandom];
+//    
     self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
-
-    self.label.text = [quote author];
-
+//
+//    self.label.text = [quote author];
+//
     self.textView.font = [UIFont fontWithName:@"Philosopher" size:32];
-    self.textView.text = [quote text];
-
+//    self.textView.text = [quote text];
     
-    [quote release];
-    //[MyViewController pageControlColorWithIndex:pageNumber];
+}
+
+- (void) updateByIndex:(int) index
+{
+    int i = abs(index % 8);
+    
+    Quote * quote = [[WikiQuoter sharedWikiQuoter] getByIndex:i];
+    self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
+    self.textView.text = [quote text];
 }
 
 @end
