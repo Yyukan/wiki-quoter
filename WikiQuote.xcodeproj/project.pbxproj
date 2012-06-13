@@ -26,9 +26,18 @@
 		F45F4005156EC20D0077D01C /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4004156EC20D0077D01C /* Icon72.png */; };
 		F45F4008156EC2730077D01C /* Icon512.png in Resources */ = {isa = PBXBuildFile; fileRef = F45F4007156EC2730077D01C /* Icon512.png */; };
 		F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45F400F156ED94D0077D01C /* Philosopher.otf */; };
+		F4C48DA81588FD6600528F1D /* WikiQuoteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */; };
+		F4C48DA91588FD6600528F1D /* WikiQuoteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */; };
 		F4DEDF681574006500BD77CB /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF671574006500BD77CB /* Logger.m */; };
 		F4DEDF6B15740F4200BD77CB /* Quote.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF6A15740F4200BD77CB /* Quote.m */; };
 		F4DEDF721574136100BD77CB /* WikiQuoter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF711574136100BD77CB /* WikiQuoter.m */; };
+		F4F3B20A1577F407007AE88E /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4F3B2091577F407007AE88E /* SenTestingKit.framework */; };
+		F4F3B20B1577F407007AE88E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCC156EACD90077D01C /* UIKit.framework */; };
+		F4F3B20C1577F407007AE88E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCE156EACD90077D01C /* Foundation.framework */; };
+		F4F3B2121577F407007AE88E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F4F3B2101577F407007AE88E /* InfoPlist.strings */; };
+		F4F3B2151577F407007AE88E /* WikiQuoteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F4F3B2141577F407007AE88E /* WikiQuoteTests.m */; };
+		F4F3B21B1577F50D007AE88E /* WikiQuoter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF711574136100BD77CB /* WikiQuoter.m */; };
+		F4F3B21C1577F516007AE88E /* Quote.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF6A15740F4200BD77CB /* Quote.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +45,7 @@
 		F420AA2015767F5800CE9DC8 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		F420AA2115767F5800CE9DC8 /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
 		F420AA2215767F5800CE9DC8 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		F429369B156FEF2B0034F723 /* QuoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = QuoteViewController.h; sourceTree = "<group>"; };
+		F429369B156FEF2B0034F723 /* QuoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteViewController.h; sourceTree = "<group>"; };
 		F429369C156FEF2B0034F723 /* QuoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteViewController.m; sourceTree = "<group>"; };
 		F429369F156FF0250034F723 /* QuoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuoteViewController.xib; sourceTree = "<group>"; };
 		F42936A6156FF6970034F723 /* v_frame_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_frame_iphone.png; sourceTree = "<group>"; };
@@ -51,7 +60,7 @@
 		F45F3FDA156EACD90077D01C /* WikiQuote-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WikiQuote-Prefix.pch"; sourceTree = "<group>"; };
 		F45F3FED156EAE610077D01C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F45F3FEE156EAE610077D01C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F45F3FF0156EAE610077D01C /* InfinityPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = InfinityPagesViewController.h; sourceTree = "<group>"; };
+		F45F3FF0156EAE610077D01C /* InfinityPagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfinityPagesViewController.h; sourceTree = "<group>"; };
 		F45F3FF1156EAE610077D01C /* InfinityPagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfinityPagesViewController.m; sourceTree = "<group>"; };
 		F45F3FF6156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfinityPagesViewController_iPad.xib; sourceTree = "<group>"; };
 		F45F3FF8156EAEE20077D01C /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InfinityPagesViewController_iPhone.xib; sourceTree = "<group>"; };
@@ -60,6 +69,8 @@
 		F45F4004156EC20D0077D01C /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon72.png; path = ../Icon72.png; sourceTree = "<group>"; };
 		F45F4007156EC2730077D01C /* Icon512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon512.png; path = ../Icon512.png; sourceTree = "<group>"; };
 		F45F400F156ED94D0077D01C /* Philosopher.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Philosopher.otf; path = Resources/Philosopher.otf; sourceTree = "<group>"; };
+		F4C48DA61588FD6600528F1D /* WikiQuoteParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiQuoteParser.h; path = WikiAPI/WikiQuoteParser.h; sourceTree = "<group>"; };
+		F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiQuoteParser.m; path = WikiAPI/WikiQuoteParser.m; sourceTree = "<group>"; };
 		F4DEDF661574006500BD77CB /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		F4DEDF671574006500BD77CB /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 		F4DEDF6915740F4200BD77CB /* Quote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Quote.h; path = WikiAPI/Quote.h; sourceTree = "<group>"; };
@@ -67,6 +78,13 @@
 		F4DEDF6D1574114A00BD77CB /* Quoter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Quoter.h; path = WikiAPI/Quoter.h; sourceTree = "<group>"; };
 		F4DEDF701574136100BD77CB /* WikiQuoter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiQuoter.h; path = WikiAPI/WikiQuoter.h; sourceTree = "<group>"; };
 		F4DEDF711574136100BD77CB /* WikiQuoter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiQuoter.m; path = WikiAPI/WikiQuoter.m; sourceTree = "<group>"; };
+		F4F3B2081577F407007AE88E /* WikiQuoteTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiQuoteTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4F3B2091577F407007AE88E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		F4F3B20F1577F407007AE88E /* WikiQuoteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WikiQuoteTests-Info.plist"; sourceTree = "<group>"; };
+		F4F3B2111577F407007AE88E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F4F3B2131577F407007AE88E /* WikiQuoteTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WikiQuoteTests.h; sourceTree = "<group>"; };
+		F4F3B2141577F407007AE88E /* WikiQuoteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WikiQuoteTests.m; sourceTree = "<group>"; };
+		F4F3B2161577F407007AE88E /* WikiQuoteTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WikiQuoteTests-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +95,16 @@
 				F45F3FCD156EACD90077D01C /* UIKit.framework in Frameworks */,
 				F45F3FCF156EACD90077D01C /* Foundation.framework in Frameworks */,
 				F45F3FD1156EACD90077D01C /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4F3B2041577F407007AE88E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4F3B20A1577F407007AE88E /* SenTestingKit.framework in Frameworks */,
+				F4F3B20B1577F407007AE88E /* UIKit.framework in Frameworks */,
+				F4F3B20C1577F407007AE88E /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -120,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				F45F3FD2156EACD90077D01C /* WikiQuote */,
+				F4F3B20D1577F407007AE88E /* WikiQuoteTests */,
 				F45F3FCB156EACD90077D01C /* Frameworks */,
 				F45F3FC9156EACD90077D01C /* Products */,
 			);
@@ -129,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				F45F3FC8156EACD90077D01C /* WikiQuote.app */,
+				F4F3B2081577F407007AE88E /* WikiQuoteTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,6 +169,7 @@
 				F45F3FCC156EACD90077D01C /* UIKit.framework */,
 				F45F3FCE156EACD90077D01C /* Foundation.framework */,
 				F45F3FD0156EACD90077D01C /* CoreGraphics.framework */,
+				F4F3B2091577F407007AE88E /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -232,8 +263,30 @@
 				F4DEDF6D1574114A00BD77CB /* Quoter.h */,
 				F4DEDF701574136100BD77CB /* WikiQuoter.h */,
 				F4DEDF711574136100BD77CB /* WikiQuoter.m */,
+				F4C48DA61588FD6600528F1D /* WikiQuoteParser.h */,
+				F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */,
 			);
 			name = WikiAPI;
+			sourceTree = "<group>";
+		};
+		F4F3B20D1577F407007AE88E /* WikiQuoteTests */ = {
+			isa = PBXGroup;
+			children = (
+				F4F3B2131577F407007AE88E /* WikiQuoteTests.h */,
+				F4F3B2141577F407007AE88E /* WikiQuoteTests.m */,
+				F4F3B20E1577F407007AE88E /* Supporting Files */,
+			);
+			path = WikiQuoteTests;
+			sourceTree = "<group>";
+		};
+		F4F3B20E1577F407007AE88E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F4F3B20F1577F407007AE88E /* WikiQuoteTests-Info.plist */,
+				F4F3B2101577F407007AE88E /* InfoPlist.strings */,
+				F4F3B2161577F407007AE88E /* WikiQuoteTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +308,24 @@
 			productName = WikiQuote;
 			productReference = F45F3FC8156EACD90077D01C /* WikiQuote.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F4F3B2071577F407007AE88E /* WikiQuoteTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4F3B2191577F407007AE88E /* Build configuration list for PBXNativeTarget "WikiQuoteTests" */;
+			buildPhases = (
+				F4F3B2031577F407007AE88E /* Sources */,
+				F4F3B2041577F407007AE88E /* Frameworks */,
+				F4F3B2051577F407007AE88E /* Resources */,
+				F4F3B2061577F407007AE88E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WikiQuoteTests;
+			productName = WikiQuoteTests;
+			productReference = F4F3B2081577F407007AE88E /* WikiQuoteTests.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -278,6 +349,7 @@
 			projectRoot = "";
 			targets = (
 				F45F3FC7156EACD90077D01C /* WikiQuote */,
+				F4F3B2071577F407007AE88E /* WikiQuoteTests */,
 			);
 		};
 /* End PBXProject section */
@@ -301,7 +373,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F4F3B2051577F407007AE88E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4F3B2121577F407007AE88E /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F4F3B2061577F407007AE88E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F45F3FC4156EACD90077D01C /* Sources */ = {
@@ -316,6 +412,18 @@
 				F4DEDF6B15740F4200BD77CB /* Quote.m in Sources */,
 				F4DEDF721574136100BD77CB /* WikiQuoter.m in Sources */,
 				F420AA2315767F5800CE9DC8 /* StringUtils.m in Sources */,
+				F4C48DA81588FD6600528F1D /* WikiQuoteParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4F3B2031577F407007AE88E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F4F3B21C1577F516007AE88E /* Quote.m in Sources */,
+				F4F3B21B1577F50D007AE88E /* WikiQuoter.m in Sources */,
+				F4F3B2151577F407007AE88E /* WikiQuoteTests.m in Sources */,
+				F4C48DA91588FD6600528F1D /* WikiQuoteParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +452,14 @@
 				F45F3FF8156EAEE20077D01C /* en */,
 			);
 			name = InfinityPagesViewController_iPhone.xib;
+			sourceTree = "<group>";
+		};
+		F4F3B2101577F407007AE88E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F4F3B2111577F407007AE88E /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -416,6 +532,36 @@
 			};
 			name = Release;
 		};
+		F4F3B2171577F407007AE88E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WikiQuoteTests/WikiQuoteTests-Prefix.pch";
+				INFOPLIST_FILE = "WikiQuoteTests/WikiQuoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		F4F3B2181577F407007AE88E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WikiQuoteTests/WikiQuoteTests-Prefix.pch";
+				INFOPLIST_FILE = "WikiQuoteTests/WikiQuoteTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -433,6 +579,15 @@
 			buildConfigurations = (
 				F45F3FEA156EACD90077D01C /* Debug */,
 				F45F3FEB156EACD90077D01C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F4F3B2191577F407007AE88E /* Build configuration list for PBXNativeTarget "WikiQuoteTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4F3B2171577F407007AE88E /* Debug */,
+				F4F3B2181577F407007AE88E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

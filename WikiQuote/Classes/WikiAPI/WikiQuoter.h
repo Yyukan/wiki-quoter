@@ -14,7 +14,15 @@
 {
     NSArray *_quotes;  
     int _currentQuote;
+    
+    
+    
+//    NSMutableArray *cache;
+    
+    NSMutableData *responseData;
+	NSURL *baseURL;
 }
+//@property (nonatomic, retain) NSMutableArray *cache;
 @property (nonatomic, retain) NSArray *quotes;
 
 + (WikiQuoter *) sharedWikiQuoter;

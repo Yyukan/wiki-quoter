@@ -20,12 +20,6 @@
 @synthesize currentIndex = _currentIndex;
 @synthesize nextIndex = _nextIndex;
 
-- (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
-{
-	UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:image]];
-    view.backgroundColor = background;
-    [background release];
-}
 
 - (QuoteViewController *) createViewController:(int)page
 {
@@ -35,6 +29,23 @@
     frame.origin.y = 0;
     controller.view.frame = frame;
     return [controller autorelease];
+}
+
+#pragma mark -
+#pragma mark Initialization and memory management 
+
+- (void)didReceiveMemoryWarning 
+{
+    [super didReceiveMemoryWarning];
+}
+
+- (void)dealloc 
+{
+    [_previosView release];
+    [_currentView release];
+    [_nextView release];
+    [_scrollView release];
+    [super dealloc];
 }
 
 - (void)loadPageWithId:(int)index onPage:(int)page {
@@ -50,6 +61,13 @@
             [self.nextView updateByIndex:index];
 			break;
 	}	
+}
+
+- (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
+{
+	UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:image]];
+    view.backgroundColor = background;
+    [background release];
 }
 
 /*
@@ -84,116 +102,56 @@
     
     // reposition to central page
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
+    
+    // activity indicator
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    activityIndicator.frame = CGRectMake(10.0, 0.0, 40.0, 40.0);
+    activityIndicator.center = _currentView.imageView.center;
+    [_currentView.imageView addSubview: activityIndicator];
+    
+    CGAffineTransform transform = CGAffineTransformMakeScale(2.0f, 2.0f);
+    activityIndicator.transform = transform;
+
+    [activityIndicator startAnimating];
+    
+    [activityIndicator release];
+}
+
+- (void)viewDidUnload {
+    self.scrollView = nil;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)sender {     
-	// All data for the documents are stored in an array (documentTitles).     
-	// We keep track of the index that we are scrolling to so that we     
-	// know what data to load for each page.     
 	if(_scrollView.contentOffset.x > _scrollView.frame.size.width) 
     {
-        TRC_DBG(@"We are moving forward ");
-		// We are moving forward. Load the current doc data on the first page.         
 		[self loadPageWithId:_currentIndex onPage:0];         
         
-		// Add one to the currentIndex or reset to 0 if we have reached the end.         
-		_currentIndex = (_currentIndex >= 100) ? 0 : _currentIndex + 1;         
+		_currentIndex++;
         
 		[self loadPageWithId:_currentIndex onPage:1];         
         
-		// Load content on the last page. This is either from the next item in the array         
-		// or the first if we have reached the end.         
-        
-		_nextIndex = (_currentIndex >= 100) ? 0 : _currentIndex + 1;         
+		_nextIndex = _currentIndex + 1;         
 		[self loadPageWithId:_nextIndex onPage:2];
-        
 	}     
-	if(_scrollView.contentOffset.x < _scrollView.frame.size.width) {         
-        TRC_DBG(@"We are moving backward ");
-
-		// We are moving backward. Load the current doc data on the last page.         
+	if(_scrollView.contentOffset.x < _scrollView.frame.size.width) 
+    {         
 		[self loadPageWithId:_currentIndex onPage:2];         
         
-		// Subtract one from the currentIndex or go to the end if we have reached the beginning.         
-		_currentIndex = (_currentIndex == 0) ? 100 : _currentIndex - 1;         
+		_currentIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;         
 		[self loadPageWithId:_currentIndex onPage:1]; 
         
-		// Load content on the first page. This is either from the prev item in the array         
-		// or the last if we have reached the beginning.
-        
-		_previosIndex = (_currentIndex == 0) ? 100 : _currentIndex - 1;         
+		_previosIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;         
 
 		[self loadPageWithId:_previosIndex onPage:0];     
 	}     
 	
-	// Reset offset back to middle page     
+	// reset offset back to middle page     
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
-}
-
-
-
-//- (void)scrollViewDidScroll:(UIScrollView *)sender {
-    // We don't want a "feedback loop" between the UIPageControl and the scroll delegate in
-    // which a scroll event generated from the user hitting the page control triggers updates from
-    // the delegate method. We use a boolean to disable the delegate logic when the page control is used.
-    //if (pageControlUsed) {
-        // do nothing - the scroll was initiated from the page control, not the user dragging
-    //    return;
-    //}
-    
-    // Switch the indicator when more than 50% of the previous/next page is visible
-//    CGFloat pageWidth = scrollView.frame.size.width;
-//    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-//    //pageControl.currentPage = page;
-//
-//    TRC_DBG(@"Current page %i", page);
-//    
-//    // load the visible page and the page on either side of it (to avoid flashes when the user starts scrolling)
-//    [self loadScrollViewWithPage:page - 1];
-//    [self loadScrollViewWithPage:page];
-//    [self loadScrollViewWithPage:page + 1];
-    
-    // A possible optimization would be to unload the views+controllers which are no longer visible
-//}
-
-// At the begin of scroll dragging, reset the boolean used when scrolls originate from the UIPageControl
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    TRC_ENTRY
-    //pageControlUsed = NO;
-}
-
-// At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
-//- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-//    TRC_ENTRY
-//    //pageControlUsed = NO;
-//}
-
-- (void)didReceiveMemoryWarning {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
-- (void)dealloc 
-{
-    [_previosView release];
-    [_currentView release];
-    [_nextView release];
-    [_scrollView release];
-    [super dealloc];
 }
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
     if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
     } else {

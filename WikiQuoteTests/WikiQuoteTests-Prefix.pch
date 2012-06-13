@@ -1,0 +1,8 @@
+//
+// Prefix header for all source files of the 'WikiQuoteTests' target in the 'WikiQuoteTests' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif

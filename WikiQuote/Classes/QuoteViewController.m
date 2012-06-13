@@ -32,6 +32,9 @@
     
     self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
     self.textView.font = [UIFont fontWithName:@"Philosopher" size:32];
+    
+    // how to center text in text view, notify itself about content size changing
+    [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
 }
 
 - (void) updateByIndex:(int) index
@@ -40,7 +43,18 @@
     
     Quote * quote = [[WikiQuoter sharedWikiQuoter] getByIndex:i];
     self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
-    self.textView.text = [quote text];
+    //self.textView.text = [quote text];
+}
+
+/**
+ * Method centers text in text view by correcting content offset 
+ */
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
+{
+    UITextView *txtView = object;
+    CGFloat topCorrect = ([txtView bounds].size.height - [txtView contentSize].height * [txtView zoomScale])  / 2.0;
+    topCorrect = (topCorrect < 0.0 ? 0.0 : topCorrect );
+    txtView.contentOffset = (CGPoint){.x = 0, .y = -topCorrect};
 }
 
 @end
