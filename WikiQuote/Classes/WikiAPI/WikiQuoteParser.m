@@ -6,7 +6,9 @@
 //  Copyright (c) 2012 shtykhno.net. All rights reserved.
 //
 
+#import "Common.h"
 #import "WikiQuoteParser.h"
+
 
 @implementation WikiQuoteParser
 
@@ -120,16 +122,32 @@
     }
 }    
 
+- (NSString *) cleanTitle:(NSString *)text
+{
+    // TODO:yukan perform title cleaning
+    return text;
+}
+
+- (NSString *) cleanQuote:(NSString *)text
+{
+    return [StringUtils cleanQuote:text];
+}
+
 - (NSArray *) parseQuotes:(NSString *)text
 {
     NSMutableArray *result = [NSMutableArray array];
     
-    Quote *quote = [[Quote alloc] initWithText:@"" author:title url:@"" description:@""];
+    // find all qoutes by patter {{Q| some text }}
+    NSArray *rawQuotes = [StringUtils findAllByFirstGroup:text regularExpression:@"\\{\\s*\\{\\s*[q|Q]\\s*\\|(.*?)\\}\\s*\\}"]; 
     
-    [result addObject:quote];
-    
-    [quote release];
-    
+    for (NSString *item in rawQuotes) {
+        
+        Quote *quote = [[Quote alloc] initWithText:[self cleanQuote:item] author:[self cleanTitle:title] url:@"" description:@""];
+        
+        [result addObject:quote];
+        [quote release];
+    }
+        
     return result;
 }
 

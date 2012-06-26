@@ -10,6 +10,14 @@
 
 @interface StringUtils : NSObject
 
++ (NSString *) replaceString:(NSString *)string regularExpression:(NSString *)regexp with:(NSString *)pattern;
++ (NSString *) replaceFirstGroupAll:(NSString *)string regularExpression:(NSString *)regularExpression;
+
++ (NSArray *) findAll:(NSString *)string regularExpression:(NSString *)regularExpression;
++ (NSArray *) findAllByFirstGroup:(NSString *)string regularExpression:(NSString *)regularExpression;
+
++ (NSString *) cleanQuote:(NSString *)text;
+
 @end
 
 

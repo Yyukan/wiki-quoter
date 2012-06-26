@@ -62,10 +62,10 @@
     return response;
 }
 
-- (void) testParser
+- (void) _testParser
 {
 
-    NSData *xml = [self loadWikiPagesAsXml:@"en" count:1];
+    NSData *xml = [self loadWikiPagesAsXml:@"ru" count:3];
     
     WikiQuoteParser *parser = [WikiQuoteParser new];
     
@@ -80,5 +80,41 @@
     [parser release];
 }
 
+- (NSString *) trimWikiText:(NSString *)text
+{
+    
+    
+    
+    return @"";
+}
+
+- (void) tesParse_Tail
+{
+    NSString *source = @"This is text before {{Q|Цитата=— Зонтики почему-то напоминают мне о смерти, — сказала она.|Автор=|Комментарий=|Оригинал=}} this is text after";
+    
+    NSString *quote = [self trimWikiText:source]; 
+     
+    STAssertEquals(@"— Зонтики почему-то напоминают мне о смерти, — сказала она.", quote, @"The text is equal");
+    
+}
+
+- (void) testParseWiki
+{
+    NSString *source = @"ношу [[шляпа|шляпы]], чтобы ни [[было|такое]] случилось";
+
+    NSString *result = [StringUtils replaceFirstGroupAll:source  regularExpression:@"\\[\\[[а-яА-Я0-9]+\\|([а-яА-Я0-9]+)\\]\\]"];
+    
+    NSLog(@"Result %@", result); 
+    STAssertTrue([@"ношу шляпы, чтобы ни такое случилось" isEqual:result], @"Text is not equal");
+}
+
+- (void) testCleanQuote
+{
+    NSString *source = @"[[Женщина]] никогда не будет играть в [[шахматы]] на равных с мужчинами, [[w:потому что|так как]] она не может пять часов сидеть за доской молча.";
+    
+    NSString *result = [StringUtils cleanQuote:source];
+    
+    NSLog(@"Result %@", result); 
+}
 
 @end

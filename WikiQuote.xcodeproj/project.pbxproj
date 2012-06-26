@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F418DFA9159A348100AAEDE6 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F420AA2115767F5800CE9DC8 /* StringUtils.m */; };
 		F420AA2315767F5800CE9DC8 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F420AA2115767F5800CE9DC8 /* StringUtils.m */; };
 		F429369D156FEF2B0034F723 /* QuoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429369C156FEF2B0034F723 /* QuoteViewController.m */; };
 		F42936A0156FF0250034F723 /* QuoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* QuoteViewController.xib */; };
@@ -420,6 +421,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F418DFA9159A348100AAEDE6 /* StringUtils.m in Sources */,
 				F4F3B21C1577F516007AE88E /* Quote.m in Sources */,
 				F4F3B21B1577F50D007AE88E /* WikiQuoter.m in Sources */,
 				F4F3B2151577F407007AE88E /* WikiQuoteTests.m in Sources */,
