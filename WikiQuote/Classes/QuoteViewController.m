@@ -31,7 +31,7 @@
     self.view.backgroundColor = [UIColor clearColor];
     
     self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
-    self.textView.font = [UIFont fontWithName:@"Philosopher" size:28];
+    self.textView.font = [UIFont fontWithName:@"Philosopher" size:23];
     
     // how to center text in text view, notify itself about content size changing
     [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
