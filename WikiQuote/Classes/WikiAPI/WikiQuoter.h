@@ -12,18 +12,14 @@
 
 @interface WikiQuoter : NSObject <Quoter>
 {
-    NSArray *_quotes;  
+    NSMutableArray *_quotes;  
     int _currentQuote;
     
-    
-    
-//    NSMutableArray *cache;
     
     NSMutableData *responseData;
 	NSURL *baseURL;
 }
-//@property (nonatomic, retain) NSMutableArray *cache;
-@property (nonatomic, retain) NSArray *quotes;
+@property (nonatomic, retain) NSMutableArray *quotes;
 
 + (WikiQuoter *) sharedWikiQuoter;
 

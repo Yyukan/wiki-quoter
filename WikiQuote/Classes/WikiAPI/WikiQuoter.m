@@ -9,6 +9,7 @@
 #define QUOTES_SIZE 100
 
 #import "WikiQuoter.h"
+#import "WikiQuoteParser.h"
 
 typedef enum 
 {
@@ -31,7 +32,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     responseData = [[NSMutableData data] retain];
     
     // TODO:yukan apply language to the request 
-    NSString *requestUrl = @"http://en.wikiquote.org/w/api.php?&grnnamespace=0&format=xmlfm&action=query&generator=random&grnlimit=5&export&exportnowrap";
+    NSString *requestUrl = @"http://ru.wikiquote.org/w/api.php?&grnnamespace=0&format=xmlfm&action=query&generator=random&grnlimit=5&export&exportnowrap";
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
         [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
@@ -52,53 +53,42 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    TRC_ENTRY
     [responseData setLength:0];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    TRC_ENTRY
     [responseData appendData:data];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    TRC_ENTRY
     NSLog(@"Error with request %@", error);
 }
+
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     TRC_ENTRY
-    NSLog(@"Response size %i", responseData.length);
-//    [self parseResponseData];
-//    [self notifyDataAvailable];
-}
+    TRC_DBG(@"Response size %i", responseData.length);
 
+    WikiQuoteParser *parser = [WikiQuoteParser new];
+    
+    NSArray *array = [parser parseWikiPagesAsXml:responseData];
+
+    TRC_DBG(@"Received [%i] qoutes", [array count]);
+    if ([array count] > 0)
+    {
+        [_quotes addObjectsFromArray:array];
+    }    
+}
 
 - (id)init
 {
     self = [super init];
     if (self) 
     {
-
-        _quotes = [NSMutableArray arrayWithCapacity:QUOTES_SIZE];
-        
-        [self loadQuotesFromWiki:EN];
-        
-//        _quotes = [[NSArray arrayWithObjects:
-//                   [Quote quoteWithText:@"Statistics show that 100% of all divorces start with marriage." fromAuthor:@"Anonymous"],
-//                   [Quote quoteWithText:@"The happiest time of anyone's life is just after the first divorce." fromAuthor:@"John Kenneth Galbraith"],
-//                   [Quote quoteWithText:@"Of course there is such a thing as love, or there wouldn't be so many divorces." fromAuthor:@"Ed Howe"],
-//                   [Quote quoteWithText:@"Macedonia as a whole tended to remain in isolation from the rest of Greece..." fromAuthor:@"Alexander the Great"],
-//                   [Quote quoteWithText:@"The Radiohead record, The Bends is my all-time favorite record on the planet" fromAuthor:@"Tommy Lee"],
-//                   [Quote quoteWithText:@"I came, I saw, I conquered." fromAuthor:@"Julius Caesar"],
-//                   [Quote quoteWithText:@"All Gaul is divided into three parts" fromAuthor:@"Julius Caesar"],
-//                   [Quote quoteWithText:@"Men willingly believe what they wish." fromAuthor:@"Julius Caesar"],
-//                   nil] retain];
-        
-        
+        self.quotes = [NSMutableArray array];
         _currentQuote = 0;     
     }
     return self;
@@ -126,16 +116,33 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
 {
     if (responseData.length == 0)
     {
-        return nil;
-    }
+        [self loadQuotesFromWiki:RU];
 
-    return [[[Quote alloc] initWithText:@"0" author:@"0" url:@"0" description:@"0"] autorelease];
+        return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
+    }
     
-    NSLog(@"Responce data length %i", responseData.length);
+    // TODO:yukan update this code 
+    int size = [self.quotes count];
+    if (index > size)
+    {
+        [self loadQuotesFromWiki:RU];
+        
+        return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
+    } 
+    else if (index == size)
+    {
+        [self loadQuotesFromWiki:RU];
+        
+        return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
+    }    
+    else 
+    {
+        if (index > size - 5)
+        {
+            [self loadQuotesFromWiki:RU];
+        }
+        return [self.quotes objectAtIndex:index];
+    }
     
-    return [[Quote alloc] initWithText:@"1" author:@"1" url:@"1" description:@"1"];
-//    Quote *quote = [self.quotes objectAtIndex:index];
-    
-//    return quote;
 }
 @end

@@ -26,22 +26,6 @@
     [super tearDown];
 }
 
-- (void)testExample
-{
-//    WikiQuoter *quoter = [WikiQuoter sharedWikiQuoter];
-//    Quote *quote = [quoter getByIndex:0];
-//    
-//    while (!quote)
-//    {
-//        quote = [quoter getByIndex:0];
-//        NSLog(@".");
-//    }
-//    NSLog(@"Author %@", [quote author]);
-//    NSLog(@"Quote %@", [quote text]);
-}
-
-#define QUOTE_MAX_LENGTH 140
-
 - (NSData *) loadWikiPagesAsXml:(NSString *)language count:(int)count
 {
     NSString *url = [NSString stringWithFormat:@"http://%@.wikiquote.org/w/api.php?format=xmlfm&action=query&grnnamespace=0&generator=random&grnlimit=%i&export&exportnowrap", language, count];
@@ -62,9 +46,8 @@
     return response;
 }
 
-- (void) _testParser
+- (void) testParser
 {
-
     NSData *xml = [self loadWikiPagesAsXml:@"ru" count:3];
     
     WikiQuoteParser *parser = [WikiQuoteParser new];
@@ -78,24 +61,6 @@
     NSLog(@"Quotes number [%i]", [quotes count]);
     
     [parser release];
-}
-
-- (NSString *) trimWikiText:(NSString *)text
-{
-    
-    
-    
-    return @"";
-}
-
-- (void) tesParse_Tail
-{
-    NSString *source = @"This is text before {{Q|Цитата=— Зонтики почему-то напоминают мне о смерти, — сказала она.|Автор=|Комментарий=|Оригинал=}} this is text after";
-    
-    NSString *quote = [self trimWikiText:source]; 
-     
-    STAssertEquals(@"— Зонтики почему-то напоминают мне о смерти, — сказала она.", quote, @"The text is equal");
-    
 }
 
 - (void) testParseWiki
@@ -114,7 +79,7 @@
     
     NSString *result = [StringUtils cleanQuote:source];
     
-    NSLog(@"Result %@", result); 
+    STAssertTrue([@"Женщина никогда не будет играть в шахматы на равных с мужчинами, так как она не может пять часов сидеть за доской молча." isEqual:result], @"Text is not equal");
 }
 
 @end

@@ -31,7 +31,7 @@
     self.view.backgroundColor = [UIColor clearColor];
     
     self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
-    self.textView.font = [UIFont fontWithName:@"Philosopher" size:32];
+    self.textView.font = [UIFont fontWithName:@"Philosopher" size:28];
     
     // how to center text in text view, notify itself about content size changing
     [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
@@ -39,11 +39,9 @@
 
 - (void) updateByIndex:(int) index
 {
-    int i = abs(index % 8);
-    
-    Quote * quote = [[WikiQuoter sharedWikiQuoter] getByIndex:i];
+    Quote *quote = [[WikiQuoter sharedWikiQuoter] getByIndex:index];
     self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
-    //self.textView.text = [quote text];
+    self.textView.text = [quote text];
 }
 
 /**

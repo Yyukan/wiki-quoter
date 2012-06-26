@@ -13,7 +13,7 @@
 #if TARGET_IPHONE_SIMULATOR != 0
 #define TRC_LEVEL 0
 #else
-#define TRC_LEVEL 5
+#define TRC_LEVEL 0
 #endif
 #endif
 

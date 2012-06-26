@@ -104,17 +104,18 @@
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
     
     // activity indicator
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    activityIndicator.frame = CGRectMake(10.0, 0.0, 40.0, 40.0);
-    activityIndicator.center = _currentView.imageView.center;
-    [_currentView.imageView addSubview: activityIndicator];
+    // TODO:yukan introduce indicator 
+//    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//    activityIndicator.frame = CGRectMake(10.0, 0.0, 40.0, 40.0);
+//    activityIndicator.center = _currentView.imageView.center;
+//    [_currentView.imageView addSubview: activityIndicator];
     
-    CGAffineTransform transform = CGAffineTransformMakeScale(2.0f, 2.0f);
-    activityIndicator.transform = transform;
-
-    [activityIndicator startAnimating];
-    
-    [activityIndicator release];
+//    CGAffineTransform transform = CGAffineTransformMakeScale(2.0f, 2.0f);
+//    activityIndicator.transform = transform;
+//
+//    [activityIndicator startAnimating];
+//    
+//    [activityIndicator release];
 }
 
 - (void)viewDidUnload {

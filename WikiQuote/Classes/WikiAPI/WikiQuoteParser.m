@@ -104,7 +104,6 @@
     {
         // save general title of the page 
         title = [NSString stringWithString:currentElement];
-        NSLog(@"Title : %@", currentElement);
         
         [currentElement release];
         currentElement = nil;
@@ -112,8 +111,6 @@
     }
     else if ([@"text" isEqual:elementName])
     {
-        NSLog(@"Text : %@", currentElement);
-
         [self.quotes addObjectsFromArray:[self parseQuotes:currentElement]];
         
         [currentElement release];
