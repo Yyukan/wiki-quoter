@@ -141,7 +141,7 @@
         NSString *cleanedQuote = [self cleanQuote:item];
         NSString *cleanedTitle = [self cleanTitle:title];
         
-        if ([@"" isEqualToString:cleanedQuote] || [@"" isEqualToString:cleanedTitle])
+        if ([StringUtils isEmptyString:cleanedQuote] || [StringUtils isEmptyString:cleanedTitle])
         {
             continue;
         }

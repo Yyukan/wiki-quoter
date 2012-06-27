@@ -17,6 +17,7 @@
 + (NSArray *) findAllByFirstGroup:(NSString *)string regularExpression:(NSString *)regularExpression;
 
 + (NSString *) cleanQuote:(NSString *)text;
++ (BOOL) isEmptyString:(NSString *) string;
 
 @end
 

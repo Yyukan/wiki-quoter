@@ -106,19 +106,18 @@
     result = [StringUtils replaceString:result regularExpression:@"\\[\\s*https\\:.*?\\]" with:@""];
     // replace any header
     result = [StringUtils replaceString:result regularExpression:@"Цитата\\s*=" with:@""];
+    // replace {{text}}
+    result = [StringUtils replaceString:result regularExpression:@"\\{\\{.*\\}\\}" with:@""];
     // replace any category 
     result = [StringUtils replaceString:result regularExpression:@"\\[\\[Категория\\:.*\\|(.*)\\]\\]" with:@""];
     result = [StringUtils replaceString:result regularExpression:@"\\[\\[Категория\\:.*\\]\\]" with:@""];
+    result = [StringUtils replaceString:result regularExpression:@"\\[\\[Category\\:.*\\]\\]" with:@""];
     // replace '[[w:text|string]]' to string
     result = [StringUtils replaceFirstGroupAll:result regularExpression:@"\\[\\[w\\:.*?\\|(.*?)\\]\\]"];
-    // replace '[[text|string]]' to string
+    // replace '[[en:text]]'
+    result = [StringUtils replaceString:result regularExpression:@"\\[\\[.{2}\\:.*\\]\\]" with:@""];
+    // replace '[[text]]' to 'text'
     result = [StringUtils replaceFirstGroupAll:result regularExpression:@"\\[\\[(.*?)\\]\\]"];
-    // replace '= anything ='
-    result = [StringUtils replaceString:result regularExpression:@"=+.*?=+" with:@""];
-    // replace 'text | author anything' to text
-    result = [StringUtils replaceString:result regularExpression:@"\\|.*?$" with:@""];
-    // replace 'text = anything' to anything
-    result = [StringUtils replaceString:result regularExpression:@"^.*?=" with:@""];
     
     result = [result stringByReplacingOccurrencesOfString:@"<br/>" withString:@" "];
     result = [result stringByReplacingOccurrencesOfString:@"<br />" withString:@" "];
@@ -130,11 +129,18 @@
     result = [result stringByReplacingOccurrencesOfString:@"BR /" withString:@" "];
     
     // replace any <tag>
-    result = [StringUtils replaceString:result regularExpression:@"<.*?>" with:@""];
+    result = [StringUtils replaceString:result regularExpression:@"<.*>" with:@""];
     // replace any <tag/>
-    result = [StringUtils replaceString:result regularExpression:@"<.*?/>" with:@""];
+    result = [StringUtils replaceString:result regularExpression:@"<.*/>" with:@""];
     // replace any &text;
     result = [StringUtils replaceString:result regularExpression:@"\\&.*?;" with:@""];
+
+    // replace '= anything ='
+    result = [StringUtils replaceString:result regularExpression:@"=+.*?=+" with:@""];
+    // replace 'text | author anything' to text
+    result = [StringUtils replaceString:result regularExpression:@"\\|.*?$" with:@""];
+    // replace 'text = anything' to anything
+    result = [StringUtils replaceString:result regularExpression:@"^.*?=" with:@""];
     
     result = [result stringByReplacingOccurrencesOfString:@"'''" withString:@" "];
     result = [result stringByReplacingOccurrencesOfString:@"''" withString:@" "];
@@ -144,5 +150,19 @@
 
     return result;
 }
+
++ (BOOL) isEmptyString:(NSString *) string 
+{
+    if([string length] == 0) 
+    { 
+        return YES;
+    } 
+    else if([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] == 0) 
+    {
+        return YES;
+    }
+    return NO;
+}
+
 
 @end
