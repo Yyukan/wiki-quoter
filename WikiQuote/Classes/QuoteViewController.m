@@ -55,6 +55,31 @@
     txtView.contentOffset = (CGPoint){.x = 0, .y = -topCorrect};
 }
 
+- (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
+    {
+        self.imageView.image = [UIImage imageNamed:@"v_frame_iphone"];
+
+        CGRect textViewFrame = CGRectMake(38, 66, 246, 344);
+        CGRect labelViewFrame = CGRectMake(20, 439, 280, 21);
+        
+        self.textView.frame = textViewFrame;
+        self.label.frame = labelViewFrame;
+    }
+    else if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
+    {
+        self.imageView.image = [UIImage imageNamed:@"h_frame_iphone"];
+
+        CGRect labelViewFrame = CGRectMake(100, 290, 280, 21);
+        CGRect textViewFrame = CGRectMake(115, 65, 250, 195);
+        
+        self.textView.frame = textViewFrame;
+        self.label.frame = labelViewFrame;
+    }
+    
+    return YES;
+}
 @end
 
 

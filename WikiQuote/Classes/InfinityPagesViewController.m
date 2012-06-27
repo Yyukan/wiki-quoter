@@ -20,14 +20,19 @@
 @synthesize currentIndex = _currentIndex;
 @synthesize nextIndex = _nextIndex;
 
-
-- (QuoteViewController *) createViewController:(int)page
+- (void) adjustFrame:(QuoteViewController *) controller page:(int)page
 {
-    QuoteViewController *controller = [[QuoteViewController alloc] init];
     CGRect frame = _scrollView.frame;
     frame.origin.x = frame.size.width * page;
     frame.origin.y = 0;
     controller.view.frame = frame;
+}
+
+
+- (QuoteViewController *) createViewController:(int)page
+{
+    QuoteViewController *controller = [[QuoteViewController alloc] init];
+    [self adjustFrame:controller page:page];
     return [controller autorelease];
 }
 
@@ -150,14 +155,24 @@
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
 }
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-    } else {
-        return YES;
-    }
+    [self adjustFrame:self.previosView page:0];
+    [self adjustFrame:self.currentView page:1];
+    [self adjustFrame:self.nextView page:2];
+    
+    
+    [self.currentView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+    [self.previosView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+    [self.nextView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+
+    // adjust content size for three pages
+	[_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width * 3, _scrollView.frame.size.height)];	
+    
+    // reposition to central page
+	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
+
+    return YES;
 }
 
 @end
