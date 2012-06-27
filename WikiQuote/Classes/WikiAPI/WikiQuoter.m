@@ -32,7 +32,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     responseData = [[NSMutableData data] retain];
     
     // TODO:yukan apply language to the request 
-    NSString *requestUrl = @"http://en.wikiquote.org/w/api.php?&grnnamespace=0&format=xmlfm&action=query&generator=random&grnlimit=3&export&exportnowrap";
+    NSString *requestUrl = @"http://ru.wikiquote.org/w/api.php?&grnnamespace=0&format=xmlfm&action=query&generator=random&grnlimit=3&export&exportnowrap";
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
         [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];

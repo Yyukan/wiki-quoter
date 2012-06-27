@@ -146,6 +146,9 @@
     result = [result stringByReplacingOccurrencesOfString:@"''" withString:@" "];
     result = [result stringByReplacingOccurrencesOfString:@"\"" withString:@" "];
 
+    // trim string head and tail
+    result = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+
     TRC_DBG(@"Quote after clean: %@", result);
 
     return result;
