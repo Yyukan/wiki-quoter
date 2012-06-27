@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 shtykhno.net. All rights reserved.
 //
 
+#import "Logger.h"
 #import "StringUtils.h"
 
 @implementation StringUtils
@@ -91,30 +92,56 @@
 {
     NSString *result = [NSString stringWithString:text];
     
+    TRC_DBG(@"Quote before clean: %@", result);
+    
+    // trim string head and tail
+    result = [result stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    // string start from '**'  
+    if ([result hasPrefix:@"**"]) return @"";
+    // replace leading '* '
+    result = [StringUtils replaceString:result regularExpression:@"^\\*\\s*" with:@""];
+    // replace any url
+    result = [StringUtils replaceString:result regularExpression:@"\\[\\s*http\\:.*?\\]" with:@""];
+    result = [StringUtils replaceString:result regularExpression:@"\\[\\s*https\\:.*?\\]" with:@""];
+    // replace any header
+    result = [StringUtils replaceString:result regularExpression:@"Цитата\\s*=" with:@""];
+    // replace any category 
+    result = [StringUtils replaceString:result regularExpression:@"\\[\\[Категория\\:.*\\|(.*)\\]\\]" with:@""];
+    result = [StringUtils replaceString:result regularExpression:@"\\[\\[Категория\\:.*\\]\\]" with:@""];
     // replace '[[w:text|string]]' to string
     result = [StringUtils replaceFirstGroupAll:result regularExpression:@"\\[\\[w\\:.*?\\|(.*?)\\]\\]"];
     // replace '[[text|string]]' to string
     result = [StringUtils replaceFirstGroupAll:result regularExpression:@"\\[\\[(.*?)\\]\\]"];
+    // replace '= anything ='
+    result = [StringUtils replaceString:result regularExpression:@"=+.*?=+" with:@""];
     // replace 'text | author anything' to text
     result = [StringUtils replaceString:result regularExpression:@"\\|.*?$" with:@""];
     // replace 'text = anything' to anything
     result = [StringUtils replaceString:result regularExpression:@"^.*?=" with:@""];
-    result = [StringUtils replaceString:result regularExpression:@"<br/>" with:@" "];
-    result = [StringUtils replaceString:result regularExpression:@"<BR/>" with:@" "];
-    result = [StringUtils replaceString:result regularExpression:@"<br />" with:@" "];
-    result = [StringUtils replaceString:result regularExpression:@"<BR />" with:@" "];
-    result = [StringUtils replaceString:result regularExpression:@"BR /" with:@" "];
-    result = [StringUtils replaceString:result regularExpression:@"br /" with:@" "];
-    result = [StringUtils replaceString:result regularExpression:@"BR/" with:@" "];
-    result = [StringUtils replaceString:result regularExpression:@"br/" with:@" "];
+    
+    result = [result stringByReplacingOccurrencesOfString:@"<br/>" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"<br />" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"br/" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"br /" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"<BR/>" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"<BR />" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"BR/" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"BR /" withString:@" "];
+    
     // replace any <tag>
     result = [StringUtils replaceString:result regularExpression:@"<.*?>" with:@""];
+    // replace any <tag/>
+    result = [StringUtils replaceString:result regularExpression:@"<.*?/>" with:@""];
     // replace any &text;
     result = [StringUtils replaceString:result regularExpression:@"\\&.*?;" with:@""];
-    result = [StringUtils replaceString:result regularExpression:@"'''" with:@""];
-    result = [StringUtils replaceString:result regularExpression:@"''" with:@""];
-    result = [StringUtils replaceString:result regularExpression:@"\"" with:@""];
     
+    result = [result stringByReplacingOccurrencesOfString:@"'''" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"''" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"\"" withString:@" "];
+
+    TRC_DBG(@"Quote after clean: %@", result);
+
     return result;
 }
 

@@ -48,7 +48,7 @@
 
 - (void) testParser
 {
-    NSData *xml = [self loadWikiPagesAsXml:@"ru" count:3];
+    NSData *xml = [self loadWikiPagesAsXml:@"ru" count:1];
     
     WikiQuoteParser *parser = [WikiQuoteParser new];
     
@@ -63,7 +63,7 @@
     [parser release];
 }
 
-- (void) testParseWiki
+- (void) ItestParseWiki
 {
     NSString *source = @"ношу [[шляпа|шляпы]], чтобы ни [[было|такое]] случилось";
 
@@ -73,13 +73,26 @@
     STAssertTrue([@"ношу шляпы, чтобы ни такое случилось" isEqual:result], @"Text is not equal");
 }
 
-- (void) testCleanQuote
+- (void) assertClean:(NSString *)source expected:(NSString *)expected
 {
-    NSString *source = @"[[Женщина]] никогда не будет играть в [[шахматы]] на равных с мужчинами, [[w:потому что|так как]] она не может пять часов сидеть за доской молча.";
-    
     NSString *result = [StringUtils cleanQuote:source];
     
-    STAssertTrue([@"Женщина никогда не будет играть в шахматы на равных с мужчинами, так как она не может пять часов сидеть за доской молча." isEqual:result], @"Text is not equal");
+    STAssertTrue([result isEqual:expected], @"Expected [%@] but actual [%@]", expected, result);
+}
+
+- (void) testClean00
+{
+    [self assertClean:@"[[Женщина]] никогда в [[шахматы]] на, [[w:потому что|так как]] она. " expected:@"Женщина никогда в шахматы на, так как она."];
+}
+
+- (void) testClean01
+{
+    [self assertClean:@"Цитата=Если уж издавать трактат — надо в предисловии сказать все, что я думаю о праве ученого искать истину! И о праве невежд судить ученого!…|Автор=|Комментарий=|Оригинал=" expected:@"Если уж издавать трактат — надо в предисловии сказать все, что я думаю о праве ученого искать истину! И о праве невежд судить ученого!…"];
+}
+
+- (void) testClean02
+{
+    [self assertClean:@"* А знаете ли, что у алжирского дея под самым носом шишка?[[Категория:Повести по алфавиту]][[Категория:Произведения Николая Гоголя]]" expected:@"А знаете ли, что у алжирского дея под самым носом шишка?"];
 }
 
 @end

@@ -130,20 +130,39 @@
     return [StringUtils cleanQuote:text];
 }
 
+- (NSArray *) findAllQuotesFromText:(NSString *)text regularExpression:(NSString *)regularExpression
+{
+    NSMutableArray *result = [NSMutableArray array];
+
+    NSArray *rawQuotes = [StringUtils findAllByFirstGroup:text regularExpression:regularExpression]; 
+    
+    for (NSString *item in rawQuotes) 
+    {
+        NSString *cleanedQuote = [self cleanQuote:item];
+        NSString *cleanedTitle = [self cleanTitle:title];
+        
+        if ([@"" isEqualToString:cleanedQuote] || [@"" isEqualToString:cleanedTitle])
+        {
+            continue;
+        }
+        
+        Quote *quote = [[Quote alloc] initWithText:cleanedQuote author:cleanedTitle url:@"" description:@""];
+        
+        [result addObject:quote];
+
+        [quote release];
+    }
+    return result;
+}
+
 - (NSArray *) parseQuotes:(NSString *)text
 {
     NSMutableArray *result = [NSMutableArray array];
     
-    // find all qoutes by patter {{Q| some text }}
-    NSArray *rawQuotes = [StringUtils findAllByFirstGroup:text regularExpression:@"\\{\\s*\\{\\s*[q|Q]\\s*\\|(.*?)\\}\\s*\\}"]; 
-    
-    for (NSString *item in rawQuotes) {
-        
-        Quote *quote = [[Quote alloc] initWithText:[self cleanQuote:item] author:[self cleanTitle:title] url:@"" description:@""];
-        
-        [result addObject:quote];
-        [quote release];
-    }
+    // add all quotes like {{Q|Quote text}}
+    [result addObjectsFromArray:[self findAllQuotesFromText:text regularExpression:@"\\{\\s*\\{\\s*[q|Q]\\s*\\|(.*?)\\}\\s*\\}"]];
+    // add all quotes like * Quote text
+    [result addObjectsFromArray:[self findAllQuotesFromText:text regularExpression:@"(\\s*\\*{1,2}[^\\*]*)"]];
         
     return result;
 }
