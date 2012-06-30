@@ -11,15 +11,6 @@
 
 @interface InfinityPagesViewController : UIViewController<UIScrollViewDelegate>
 {
-    UIScrollView *_scrollView;
-    
-    QuoteViewController *_previosView;
-    QuoteViewController *_currentView;
-    QuoteViewController *_nextView;
-    
-    int _previosIndex;
-	int _currentIndex;
-	int _nextIndex;
 }
 
 @property (nonatomic, retain) QuoteViewController *previosView;

@@ -80,7 +80,9 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     if ([array count] > 0)
     {
         [_quotes addObjectsFromArray:array];
-    }    
+    }   
+    
+    [parser release];
 }
 
 - (id)init

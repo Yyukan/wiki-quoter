@@ -97,12 +97,12 @@
 
 - (void) testClean03
 {
-    [self assertClean:@"* the text 1 {{imdb name|0300712|Jim Gaffigan}}" expected:@"the text 1 "];
+    [self assertClean:@"* the text 1 {{imdb name|0300712|Jim Gaffigan}}" expected:@"the text 1"];
 }
 
 - (void) testClean04
 {
-    [self assertClean:@"* the text 2 {{tv.com person|865|Jim Gaffigan}} {{DEFAULTSORT:Gaffigan, Jim}} [[Category:Comedians]][[Category:Americans]]" expected:@"the text 2  "];
+    [self assertClean:@"* the text 2 {{tv.com person|865|Jim Gaffigan}} {{DEFAULTSORT:Gaffigan, Jim}} [[Category:Comedians]][[Category:Americans]]" expected:@"the text 2"];
 }
 
 - (void) testClean05

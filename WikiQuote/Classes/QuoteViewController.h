@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WikiQuoter.h"
 
-@interface QuoteViewController : UIViewController
+@interface QuoteViewController : UIViewController <UIScrollViewDelegate>
 {
     UIImageView *imageView;
 }

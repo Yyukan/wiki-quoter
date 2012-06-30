@@ -12,7 +12,9 @@
 
 @implementation QuoteViewController
 
-@synthesize imageView, label, textView;
+@synthesize imageView = _imageView;
+@synthesize label = _label;
+@synthesize textView = _textView;
 
 // Creates the color list the first time this method is invoked. Returns one color object from the list.
 + (UIColor *)pageControlColorWithIndex:(NSUInteger)index {
@@ -26,15 +28,46 @@
     [super dealloc];
 }
 
+- (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
+{
+	UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:image]];
+    view.backgroundColor = background;
+    [background release];
+}
+
 // Set the label and background color when the view has finished loading.
 - (void)viewDidLoad {
+    
+    UIScrollView *scrollView = (UIScrollView *) self.view;
+    scrollView.contentOffset = CGPointMake(0, 0);
+    
+    CGRect bounds = self.view.bounds;
+    
+    // drop down view 
+    // TODO:init with buttons and actions
+    UIView *dropDownView = [[UIView alloc] initWithFrame:CGRectMake(0, bounds.size.height + 20 , bounds.size.width, 116)];
+    
+    [self setBackgroundImage:dropDownView image:@"v_bottom_background_iphone"];
+    
+    [scrollView addSubview:dropDownView];
+    
+    [dropDownView release];
+    
+    scrollView.pagingEnabled = TRUE;
+    
+    scrollView.bounces = FALSE;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.contentSize = CGSizeMake(bounds.size.width, bounds.size.height + 116);
+    scrollView.delegate = self;
+
+    
     self.view.backgroundColor = [UIColor clearColor];
     
     self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
     self.textView.font = [UIFont fontWithName:@"Philosopher" size:23];
     
     // how to center text in text view, notify itself about content size changing
-    [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
+    [self.textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
 }
 
 - (void) updateByIndex:(int) index

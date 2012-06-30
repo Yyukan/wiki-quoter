@@ -22,12 +22,11 @@
 
 - (void) adjustFrame:(QuoteViewController *) controller page:(int)page
 {
-    CGRect frame = _scrollView.frame;
+    CGRect frame = self.scrollView.frame;
     frame.origin.x = frame.size.width * page;
     frame.origin.y = 0;
     controller.view.frame = frame;
 }
-
 
 - (QuoteViewController *) createViewController:(int)page
 {

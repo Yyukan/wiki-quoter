@@ -12,7 +12,6 @@
 @interface WikiQuoteParser : NSObject <NSXMLParserDelegate>
 {
     @private
-    NSMutableArray *quotes;
     
     BOOL titleElement;
     BOOL textElement;
