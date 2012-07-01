@@ -19,16 +19,14 @@
 @synthesize textView = _textView;
 @synthesize dropDownView = _dropDownView;
 
-// Creates the color list the first time this method is invoked. Returns one color object from the list.
-+ (UIColor *)pageControlColorWithIndex:(NSUInteger)index {
-    return [UIColor greenColor];
-}
+@synthesize wikiQuoter = _wikiQuoter;
 
-//
-// Memory management
-//
+#pragma mark -
+#pragma mark Initialization and memory management 
 
-- (void)dealloc {
+
+- (void)dealloc 
+{
     [_dropDownView release];
     [_label release];
     [_textView release];
@@ -36,6 +34,14 @@
     [super dealloc];
 }
 
+- (WikiQuoter *)wikiQuoter
+{
+    if (_wikiQuoter == nil)
+    {
+        _wikiQuoter = [WikiQuoter sharedWikiQuoter];
+    }
+    return _wikiQuoter;
+}
 
 - (UIButton *)createButton:(CGRect)frame imageName:(NSString *)imageName title:(NSString *)title selector:(SEL) selector
 {
@@ -45,13 +51,18 @@
     [button setBackgroundColor:[UIColor clearColor]];
     [button setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [button setTitle:title forState:UIControlStateNormal];
+    [button.titleLabel setFont:[UIFont fontWithName:@"Philosopher" size:17]];
+    [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
     button.frame = frame;
     return button;
 }
 
 - (void) initDropDownView:(CGRect) bounds
 {
-    self.dropDownView = [[UIView alloc] initWithFrame:CGRectMake(0, bounds.size.height + 20 , bounds.size.width, DROP_DOWN_VIEW_HEIGHT)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, bounds.size.height + 20 , bounds.size.width, DROP_DOWN_VIEW_HEIGHT)];
+    
+    self.dropDownView = view;
+    [view release];
     
     [UIUtils setBackgroundImage:self.dropDownView image:@"v_bottom_background_iphone"];
 
@@ -62,7 +73,6 @@
     [self.dropDownView addSubview:[self createButton:CGRectMake(100, 10, 40, 40) imageName:@"twitter_iphone" title:nil selector:@selector(toTwitter:)]];
     [self.dropDownView addSubview:[self createButton:CGRectMake(180, 10, 40, 40) imageName:@"googleplus_iphone" title:nil selector:@selector(toGooglePlus:)]];
     [self.dropDownView addSubview:[self createButton:CGRectMake(260, 10, 40, 40) imageName:@"email_iphone" title:nil selector:@selector(toEmail:)]];
-    
 }
 
 - (void)viewDidLoad 
@@ -72,19 +82,19 @@
     CGRect bounds = self.view.bounds;
     
     UIScrollView *scrollView = (UIScrollView *) self.view;
-    scrollView.contentOffset = CGPointMake(0, 0);
     
     [self initDropDownView : bounds];
     
     [scrollView addSubview:self.dropDownView];
     
-    scrollView.pagingEnabled = TRUE;
+    scrollView.pagingEnabled = YES;
     
-    scrollView.bounces = FALSE;
-    scrollView.showsHorizontalScrollIndicator = FALSE;
+    scrollView.bounces = NO;
+    scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.showsVerticalScrollIndicator = NO;
     
     scrollView.contentSize = CGSizeMake(bounds.size.width, bounds.size.height + DROP_DOWN_VIEW_HEIGHT);
+    scrollView.contentOffset = CGPointMake(0, 0);
     scrollView.delegate = self;
 
     self.view.backgroundColor = [UIColor clearColor];
@@ -98,16 +108,8 @@
 
 - (void)viewDidUnload
 {
-    [self.dropDownView release];
-    
+    self.dropDownView = nil;
     [super viewDidUnload];
-}
-
-- (void) updateByIndex:(int) index
-{
-    Quote *quote = [[WikiQuoter sharedWikiQuoter] getByIndex:index];
-    self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
-    self.textView.text = [quote text];
 }
 
 /**
@@ -123,6 +125,10 @@
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    CGRect bounds = self.view.bounds;
+
+    UIScrollView *scrollView = (UIScrollView *) self.view;
+
     if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
     {
         self.imageView.image = [UIImage imageNamed:@"v_frame_iphone"];
@@ -132,29 +138,49 @@
         
         self.textView.frame = textViewFrame;
         self.label.frame = labelViewFrame;
+
     }
     else if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
     {
         self.imageView.image = [UIImage imageNamed:@"h_frame_iphone"];
 
         CGRect labelViewFrame = CGRectMake(100, 290, 280, 21);
-        CGRect textViewFrame = CGRectMake(115, 65, 250, 195);
+        CGRect textViewFrame = CGRectMake(90, 65, 295, 193);
         
         self.textView.frame = textViewFrame;
         self.label.frame = labelViewFrame;
     }
+     
+    scrollView.contentSize = CGSizeMake(bounds.size.width, bounds.size.height + DROP_DOWN_VIEW_HEIGHT);
+    // 20 here is status bar size 
+    self.dropDownView.frame = CGRectMake(0, bounds.size.height + 20 , bounds.size.width, DROP_DOWN_VIEW_HEIGHT);
     
     return YES;
 }
 
+- (void) updateByIndex:(int) index
+{
+    Quote *quote = [self.wikiQuoter getByIndex:index];
+    self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
+    self.textView.text = [quote text];
+}
+
 - (IBAction)ruLanguageButtonPressed:(id)sender
 {
-    TRC_ENTRY
+    if (![self.wikiQuoter.language isEqual:LANG_RU])
+    {
+        [self.wikiQuoter setLanguage:LANG_RU];
+        TRC_ENTRY
+    }
 }
 
 - (IBAction)enLanguageButtonPressed:(id)sender
 {
-    TRC_ENTRY
+    if (![self.wikiQuoter.language isEqual:LANG_EN])
+    {
+        [self.wikiQuoter setLanguage:LANG_EN];
+        TRC_ENTRY
+    }
 }
 
 - (IBAction)toFacebook:(id)sender

@@ -10,7 +10,12 @@
 #import "Common.h"
 #import "Quoter.h"
 
-@interface WikiQuoter : NSObject <Quoter>
+#define LANG_RU @"ru"
+#define LANG_EN @"en"
+
+#define WIKI_PAGES_COUNT 1
+
+@interface WikiQuoter : NSObject 
 {
     NSMutableArray *_quotes;  
     int _currentQuote;
@@ -19,7 +24,9 @@
     NSMutableData *responseData;
 	NSURL *baseURL;
 }
+
 @property (nonatomic, retain) NSMutableArray *quotes;
+@property (nonatomic, retain) NSString *language;
 
 + (WikiQuoter *) sharedWikiQuoter;
 

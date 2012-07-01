@@ -11,28 +11,55 @@
 #import "WikiQuoter.h"
 #import "WikiQuoteParser.h"
 
-typedef enum 
-{
-    EN, 
-    RU
-    
-} WikiLanguages ;
+@interface WikiQuoter()
+
+- (void) loadQuotesFromWiki;
+
+@end
 
 @implementation WikiQuoter
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
 
 @synthesize quotes = _quotes;
+@synthesize language = _language;
 
 #pragma mark -
 #pragma Initialization and memory management
 
-- (void) loadQuotesFromWiki:(WikiLanguages)language
+- (id)init
+{
+    self = [super init];
+    if (self) 
+    {
+        self.quotes = [NSMutableArray array];
+        self.language = LANG_EN;
+        
+        _currentQuote = 0;     
+    }
+    return self;
+}
+
+- (void) dealloc
+{
+    [_quotes release];
+    [super dealloc];
+}
+
+- (void) setLanguage:(NSString *)language
+{
+    [_language release];
+    _language = [language retain];
+    
+    [_quotes removeAllObjects];    
+    [self loadQuotesFromWiki];
+}
+
+- (void) loadQuotesFromWiki
 {
     responseData = [[NSMutableData data] retain];
     
-    // TODO:yukan apply language to the request 
-    NSString *requestUrl = @"http://ru.wikiquote.org/w/api.php?&grnnamespace=0&format=xmlfm&action=query&generator=random&grnlimit=3&export&exportnowrap";
+    NSString *requestUrl = [NSString stringWithFormat:@"http://%@.wikiquote.org/w/api.php?&grnnamespace=0&format=xmlfm&action=query&generator=random&grnlimit=%i&export&exportnowrap", self.language, WIKI_PAGES_COUNT];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
         [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
@@ -66,7 +93,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     NSLog(@"Error with request %@", error);
 }
 
-
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     TRC_ENTRY
@@ -85,40 +111,11 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     [parser release];
 }
 
-- (id)init
-{
-    self = [super init];
-    if (self) 
-    {
-        self.quotes = [NSMutableArray array];
-        _currentQuote = 0;     
-    }
-    return self;
-}
-
-- (void) dealloc
-{
-    [_quotes release];
-    [super dealloc];
-}
-
-- (Quote *) getRandom;
-{
-    Quote *quote = [self.quotes objectAtIndex:_currentQuote];
-    _currentQuote++;
-    if (_currentQuote >= [self.quotes count])
-    {
-        _currentQuote = 0;
-    }
-    
-    return quote;
-}
-
 - (Quote *) getByIndex:(int) index
 {
     if (responseData.length == 0)
     {
-        [self loadQuotesFromWiki:RU];
+        [self loadQuotesFromWiki];
 
         return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
     }
@@ -127,13 +124,13 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     int size = [self.quotes count];
     if (index > size)
     {
-        [self loadQuotesFromWiki:RU];
+        [self loadQuotesFromWiki];
         
         return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
     } 
     else if (index == size)
     {
-        [self loadQuotesFromWiki:RU];
+        [self loadQuotesFromWiki];
         
         return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
     }    
@@ -141,7 +138,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     {
         if (index > size - 5)
         {
-            [self loadQuotesFromWiki:RU];
+            [self loadQuotesFromWiki];
         }
         return [self.quotes objectAtIndex:index];
     }

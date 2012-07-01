@@ -67,13 +67,6 @@
 	}	
 }
 
-- (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
-{
-	UIColor *background = [[UIColor alloc] initWithPatternImage:[UIImage imageNamed:image]];
-    view.backgroundColor = background;
-    [background release];
-}
-
 /*
  // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
  */
@@ -99,7 +92,7 @@
 	[self loadPageWithId:0 onPage:1];
 	[self loadPageWithId:1 onPage:2];
     
-    [self setBackgroundImage:self.view image:@"background@2x.png"];
+    [UIUtils setBackgroundImage:self.view image:@"background@2x"];
 
     // adjust content size for three pages
 	[_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width * 3, _scrollView.frame.size.height)];	
@@ -122,11 +115,32 @@
 //    [activityIndicator release];
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
     self.scrollView = nil;
+    [super viewDidUnload];
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)sender {     
+- (void)scrollViewDidScroll:(UIScrollView *)sender 
+{
+//    TRC_ENTRY
+//    int scrollDirection;
+//    if (lastContentOffset > sender.contentOffset.x)
+//        scrollDirection = RIGHT;
+//    else if (lastContentOffset < scrollView.contentOffset.x) 
+//        scrollDirection = LEFT;
+//    
+//    lastContentOffset = scrollView.contentOffset.x;
+//    
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    TRC_ENTRY
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)sender 
+{
 	if(_scrollView.contentOffset.x > _scrollView.frame.size.width) 
     {
 		[self loadPageWithId:_currentIndex onPage:0];         
@@ -159,7 +173,6 @@
     [self adjustFrame:self.previosView page:0];
     [self adjustFrame:self.currentView page:1];
     [self adjustFrame:self.nextView page:2];
-    
     
     [self.currentView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     [self.previosView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
