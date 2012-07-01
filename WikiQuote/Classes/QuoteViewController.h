@@ -11,12 +11,13 @@
 
 @interface QuoteViewController : UIViewController <UIScrollViewDelegate>
 {
-    UIImageView *imageView;
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *label;
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, retain) UIView *dropDownView;
 
 - (void) updateByIndex:(int) index;
 

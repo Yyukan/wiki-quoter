@@ -16,6 +16,7 @@
 
 #import "Logger.h"
 #import "StringUtils.h"
+#import "UIUtils.h"
 #import "SynthesizeSingleton.h"
 
 #endif

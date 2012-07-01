@@ -29,6 +29,14 @@
 		F45F4010156ED94D0077D01C /* Philosopher.otf in Resources */ = {isa = PBXBuildFile; fileRef = F45F400F156ED94D0077D01C /* Philosopher.otf */; };
 		F4A52A1E159B89D500DA37BD /* h_frame_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4A52A1D159B89D500DA37BD /* h_frame_iphone.png */; };
 		F4B454C9159F07CE00CD82F4 /* v_bottom_background_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B454C8159F07CE00CD82F4 /* v_bottom_background_iphone.png */; };
+		F4B454CD15A05AD700CD82F4 /* UIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B454CC15A05AD700CD82F4 /* UIUtils.m */; };
+		F4B454CE15A05AD700CD82F4 /* UIUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B454CC15A05AD700CD82F4 /* UIUtils.m */; };
+		F4B454D315A0602A00CD82F4 /* facebook_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B454D215A0602A00CD82F4 /* facebook_iphone.png */; };
+		F4B454D415A0602A00CD82F4 /* facebook_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B454D215A0602A00CD82F4 /* facebook_iphone.png */; };
+		F4B454D715A06C1900CD82F4 /* email_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B454D515A06C1900CD82F4 /* email_iphone.png */; };
+		F4B454D815A06C1900CD82F4 /* googleplus_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B454D615A06C1900CD82F4 /* googleplus_iphone.png */; };
+		F4B454DA15A06C2300CD82F4 /* twitter_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B454D915A06C2300CD82F4 /* twitter_iphone.png */; };
+		F4B454DC15A0781300CD82F4 /* lang_button.png in Resources */ = {isa = PBXBuildFile; fileRef = F4B454DB15A0781200CD82F4 /* lang_button.png */; };
 		F4C48DA81588FD6600528F1D /* WikiQuoteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */; };
 		F4C48DA91588FD6600528F1D /* WikiQuoteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */; };
 		F4DEDF681574006500BD77CB /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF671574006500BD77CB /* Logger.m */; };
@@ -74,6 +82,13 @@
 		F45F400F156ED94D0077D01C /* Philosopher.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Philosopher.otf; path = Resources/Philosopher.otf; sourceTree = "<group>"; };
 		F4A52A1D159B89D500DA37BD /* h_frame_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = h_frame_iphone.png; sourceTree = "<group>"; };
 		F4B454C8159F07CE00CD82F4 /* v_bottom_background_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_bottom_background_iphone.png; sourceTree = "<group>"; };
+		F4B454CB15A05AD700CD82F4 /* UIUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIUtils.h; sourceTree = "<group>"; };
+		F4B454CC15A05AD700CD82F4 /* UIUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIUtils.m; sourceTree = "<group>"; };
+		F4B454D215A0602A00CD82F4 /* facebook_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook_iphone.png; sourceTree = "<group>"; };
+		F4B454D515A06C1900CD82F4 /* email_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = email_iphone.png; sourceTree = "<group>"; };
+		F4B454D615A06C1900CD82F4 /* googleplus_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = googleplus_iphone.png; sourceTree = "<group>"; };
+		F4B454D915A06C2300CD82F4 /* twitter_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter_iphone.png; sourceTree = "<group>"; };
+		F4B454DB15A0781200CD82F4 /* lang_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lang_button.png; sourceTree = "<group>"; };
 		F4C48DA61588FD6600528F1D /* WikiQuoteParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiQuoteParser.h; path = WikiAPI/WikiQuoteParser.h; sourceTree = "<group>"; };
 		F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiQuoteParser.m; path = WikiAPI/WikiQuoteParser.m; sourceTree = "<group>"; };
 		F4DEDF661574006500BD77CB /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
@@ -119,12 +134,17 @@
 		F42936A1156FF6970034F723 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				F4B454C8159F07CE00CD82F4 /* v_bottom_background_iphone.png */,
 				F42936A2156FF6970034F723 /* Backgrounds */,
 				F42936A4156FF6970034F723 /* Icons */,
 				F42936A5156FF6970034F723 /* Splashes */,
 				F42936A6156FF6970034F723 /* v_frame_iphone.png */,
 				F4A52A1D159B89D500DA37BD /* h_frame_iphone.png */,
+				F4B454C8159F07CE00CD82F4 /* v_bottom_background_iphone.png */,
+				F4B454D215A0602A00CD82F4 /* facebook_iphone.png */,
+				F4B454D915A06C2300CD82F4 /* twitter_iphone.png */,
+				F4B454D515A06C1900CD82F4 /* email_iphone.png */,
+				F4B454D615A06C1900CD82F4 /* googleplus_iphone.png */,
+				F4B454DB15A0781200CD82F4 /* lang_button.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -229,6 +249,8 @@
 				F420AA2215767F5800CE9DC8 /* SynthesizeSingleton.h */,
 				F4DEDF661574006500BD77CB /* Logger.h */,
 				F4DEDF671574006500BD77CB /* Logger.m */,
+				F4B454CB15A05AD700CD82F4 /* UIUtils.h */,
+				F4B454CC15A05AD700CD82F4 /* UIUtils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -379,6 +401,11 @@
 				F42936AA156FFA070034F723 /* background@2x.png in Resources */,
 				F4A52A1E159B89D500DA37BD /* h_frame_iphone.png in Resources */,
 				F4B454C9159F07CE00CD82F4 /* v_bottom_background_iphone.png in Resources */,
+				F4B454D315A0602A00CD82F4 /* facebook_iphone.png in Resources */,
+				F4B454D715A06C1900CD82F4 /* email_iphone.png in Resources */,
+				F4B454D815A06C1900CD82F4 /* googleplus_iphone.png in Resources */,
+				F4B454DA15A06C2300CD82F4 /* twitter_iphone.png in Resources */,
+				F4B454DC15A0781300CD82F4 /* lang_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F3B2121577F407007AE88E /* InfoPlist.strings in Resources */,
+				F4B454D415A0602A00CD82F4 /* facebook_iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,6 +450,7 @@
 				F4DEDF721574136100BD77CB /* WikiQuoter.m in Sources */,
 				F420AA2315767F5800CE9DC8 /* StringUtils.m in Sources */,
 				F4C48DA81588FD6600528F1D /* WikiQuoteParser.m in Sources */,
+				F4B454CD15A05AD700CD82F4 /* UIUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +463,7 @@
 				F4F3B21B1577F50D007AE88E /* WikiQuoter.m in Sources */,
 				F4F3B2151577F407007AE88E /* WikiQuoteTests.m in Sources */,
 				F4C48DA91588FD6600528F1D /* WikiQuoteParser.m in Sources */,
+				F4B454CE15A05AD700CD82F4 /* UIUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
