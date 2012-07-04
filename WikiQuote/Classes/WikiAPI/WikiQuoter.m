@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 shtykhno.net. All rights reserved.
 //
 
-#define QUOTES_SIZE 100
-
 #import "WikiQuoter.h"
 #import "WikiQuoteParser.h"
 
@@ -21,8 +19,10 @@
 
 SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
 
-@synthesize quotes = _quotes;
 @synthesize language = _language;
+
+@synthesize langToQuotes = _langToQuotes;
+@synthesize parser = _parser;
 
 #pragma mark -
 #pragma Initialization and memory management
@@ -32,27 +32,31 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     self = [super init];
     if (self) 
     {
-        self.quotes = [NSMutableArray array];
-        self.language = LANG_EN;
+        self.parser = [[WikiQuoteParser new] autorelease];
         
-        _currentQuote = 0;     
+        self.langToQuotes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                             [NSMutableArray arrayWithCapacity:QUOTES_HISTORY_SIZE], LANG_RU, 
+                             [NSMutableArray arrayWithCapacity:QUOTES_HISTORY_SIZE], LANG_EN, 
+                             [NSNumber numberWithInt:0], LANG_RU_INDEX,
+                             [NSNumber numberWithInt:0], LANG_EN_INDEX,
+                             nil];
+        self.language = LANG_RU;
     }
     return self;
 }
 
 - (void) dealloc
 {
-    [_quotes release];
+    [_langToQuotes release];
+    [_parser release];
     [super dealloc];
 }
 
 - (void) setLanguage:(NSString *)language
 {
+    // change current language
     [_language release];
     _language = [language retain];
-    
-    [_quotes removeAllObjects];    
-    [self loadQuotesFromWiki];
 }
 
 - (void) loadQuotesFromWiki
@@ -65,7 +69,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
         [[[NSURLConnection alloc] initWithRequest:request delegate:self] autorelease];
     TRC_ENTRY
 }
-
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection
              willSendRequest:(NSURLRequest *)request
@@ -95,53 +98,61 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    TRC_ENTRY
+    // when request is completed response data contains response with wiki XML
     TRC_DBG(@"Response size %i", responseData.length);
 
-    WikiQuoteParser *parser = [WikiQuoteParser new];
-    
-    NSArray *array = [parser parseWikiPagesAsXml:responseData];
+    // parse XML to quotes 
+    NSArray *parsed = [self.parser parseWikiPagesAsXml:responseData];
 
-    TRC_DBG(@"Received [%i] qoutes", [array count]);
-    if ([array count] > 0)
+    TRC_DBG(@"Received [%i] qoutes for language [%@]", [parsed count], self.language);
+    if ([parsed count] > 0)
     {
-        [_quotes addObjectsFromArray:array];
+        NSMutableArray *quotes = [self.langToQuotes objectForKey:self.language];
+        [quotes addObjectsFromArray:parsed];
     }   
-    
-    [parser release];
 }
 
 - (Quote *) getByIndex:(int) index
 {
-    if (responseData.length == 0)
-    {
-        [self loadQuotesFromWiki];
+    NSMutableArray *quotes = [self.langToQuotes objectForKey:self.language];
+    NSString *key = [NSString stringWithFormat:@"%@_index", self.language];
+    NSNumber *number = [self.langToQuotes objectForKey:key];
+    
+    int correctionIndex = [number intValue];
 
+    int size = [quotes count];
+
+    if (size == 0)
+    {
+        // load data from wiki page 
+        [self loadQuotesFromWiki];
+        // return empty quote 
         return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
     }
+        
+    int realIndex = index;
     
-    // TODO:yukan update this code 
-    int size = [self.quotes count];
-    if (index > size)
+    if ((index - correctionIndex) > (QUOTES_HISTORY_SIZE / 2))
     {
-        [self loadQuotesFromWiki];
-        
-        return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
-    } 
-    else if (index == size)
+        [quotes removeObjectAtIndex:0];
+        correctionIndex++;
+    }
+    realIndex -= correctionIndex;
+    
+    if (realIndex < 0)
     {
-        [self loadQuotesFromWiki];
-        
-        return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
-    }    
-    else 
-    {
-        if (index > size - 5)
-        {
-            [self loadQuotesFromWiki];
-        }
-        return [self.quotes objectAtIndex:index];
+        realIndex = 0;
+        correctionIndex--;
     }
     
+    if (realIndex > size - (QUOTES_HISTORY_SIZE / 2))
+    {
+        [self loadQuotesFromWiki];
+    }
+    
+    TRC_DBG(@"Requested index %i real index %i correction %i", index, realIndex, correctionIndex);
+    
+    [self.langToQuotes setValue:[NSNumber numberWithInt:correctionIndex] forKey:key];
+    return [quotes objectAtIndex:realIndex];
 }
 @end

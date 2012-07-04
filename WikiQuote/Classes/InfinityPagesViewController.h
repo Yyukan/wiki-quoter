@@ -10,8 +10,6 @@
 #import "QuoteViewController.h"
 
 @interface InfinityPagesViewController : UIViewController<UIScrollViewDelegate>
-{
-}
 
 @property (nonatomic, retain) QuoteViewController *previosView;
 @property (nonatomic, retain) QuoteViewController *currentView;

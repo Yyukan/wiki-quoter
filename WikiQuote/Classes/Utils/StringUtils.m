@@ -143,6 +143,7 @@
     result = [StringUtils replaceString:result regularExpression:@"^.*?=" with:@""];
     
     result = [result stringByReplacingOccurrencesOfString:@"'''" withString:@" "];
+    result = [result stringByReplacingOccurrencesOfString:@"::" withString:@""];
     result = [result stringByReplacingOccurrencesOfString:@"''" withString:@" "];
     result = [result stringByReplacingOccurrencesOfString:@"\"" withString:@" "];
 

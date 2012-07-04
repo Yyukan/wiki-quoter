@@ -8,6 +8,10 @@
 
 #import "InfinityPagesViewController.h"
 
+#define PREVIOS_PAGE 0
+#define CURRENT_PAGE 1
+#define NEXT_PAGE 2
+
 @implementation InfinityPagesViewController
 
 @synthesize scrollView = _scrollView;
@@ -52,16 +56,18 @@
     [super dealloc];
 }
 
-- (void)loadPageWithId:(int)index onPage:(int)page {
+- (void)loadPageByIndex:(int)index onPage:(int)page 
+{
 	// load data for page
-	switch (page) {
-		case 0:
+	switch (page) 
+    {
+		case PREVIOS_PAGE:
 			[self.previosView updateByIndex:index];
 			break;
-		case 1:
+		case CURRENT_PAGE:
             [self.currentView updateByIndex:index];
 			break;
-		case 2:
+		case NEXT_PAGE:
             [self.nextView updateByIndex:index];
 			break;
 	}	
@@ -75,9 +81,9 @@
     [super viewDidLoad];
     
     // create placeholders for each of our documents
-	self.previosView = [self createViewController:0];
-	self.currentView = [self createViewController:1];
-	self.nextView = [self createViewController:2];
+	self.previosView = [self createViewController:PREVIOS_PAGE];
+	self.currentView = [self createViewController:CURRENT_PAGE];
+	self.nextView = [self createViewController:NEXT_PAGE];
 
     _scrollView.pagingEnabled = YES;
     _scrollView.showsHorizontalScrollIndicator = NO;
@@ -88,9 +94,9 @@
 	[_scrollView addSubview:_currentView.view];
 	[_scrollView addSubview:_nextView.view];
     
-    [self loadPageWithId:9 onPage:0];
-	[self loadPageWithId:0 onPage:1];
-	[self loadPageWithId:1 onPage:2];
+    [self loadPageByIndex:9 onPage:PREVIOS_PAGE];
+	[self loadPageByIndex:0 onPage:CURRENT_PAGE];
+	[self loadPageByIndex:1 onPage:NEXT_PAGE];
     
     [UIUtils setBackgroundImage:self.view image:@"background@2x"];
 
@@ -143,25 +149,25 @@
 {
 	if(_scrollView.contentOffset.x > _scrollView.frame.size.width) 
     {
-		[self loadPageWithId:_currentIndex onPage:0];         
+		[self loadPageByIndex:_currentIndex onPage:PREVIOS_PAGE];         
         
 		_currentIndex++;
         
-		[self loadPageWithId:_currentIndex onPage:1];         
+		[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE];         
         
 		_nextIndex = _currentIndex + 1;         
-		[self loadPageWithId:_nextIndex onPage:2];
+		[self loadPageByIndex:_nextIndex onPage:NEXT_PAGE];
 	}     
 	if(_scrollView.contentOffset.x < _scrollView.frame.size.width) 
     {         
-		[self loadPageWithId:_currentIndex onPage:2];         
+		[self loadPageByIndex:_currentIndex onPage:NEXT_PAGE];         
         
 		_currentIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;         
-		[self loadPageWithId:_currentIndex onPage:1]; 
+		[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE]; 
         
 		_previosIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;         
 
-		[self loadPageWithId:_previosIndex onPage:0];     
+		[self loadPageByIndex:_previosIndex onPage:PREVIOS_PAGE];     
 	}     
 	
 	// reset offset back to middle page     

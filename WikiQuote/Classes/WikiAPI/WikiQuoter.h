@@ -9,24 +9,26 @@
 #import <Foundation/Foundation.h>
 #import "Common.h"
 #import "Quoter.h"
+#import "WikiQuoteParser.h"
 
 #define LANG_RU @"ru"
 #define LANG_EN @"en"
 
+#define LANG_RU_INDEX @"ru_index"
+#define LANG_EN_INDEX @"en_index"
+
 #define WIKI_PAGES_COUNT 1
+#define QUOTES_HISTORY_SIZE 20
 
 @interface WikiQuoter : NSObject 
 {
-    NSMutableArray *_quotes;  
-    int _currentQuote;
-    
-    
     NSMutableData *responseData;
 	NSURL *baseURL;
 }
 
-@property (nonatomic, retain) NSMutableArray *quotes;
+@property (nonatomic, retain) NSMutableDictionary *langToQuotes;
 @property (nonatomic, retain) NSString *language;
+@property (nonatomic, retain) WikiQuoteParser *parser;
 
 + (WikiQuoter *) sharedWikiQuoter;
 

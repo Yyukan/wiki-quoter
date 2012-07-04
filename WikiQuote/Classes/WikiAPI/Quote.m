@@ -15,20 +15,18 @@
 @synthesize url = _url;
 @synthesize description = _description;
 
+#pragma mark -
+#pragma mark Initialization and memory management 
 
-//=========================================================== 
-// Memory management
-//
-//=========================================================== 
-
-- (id)initWithText:(NSString*)text author:(NSString*)author url:(NSString*)url description:(NSString*)description 
+- (id)initWithText:(NSString*)text author:(NSString*)author url:(NSString*)url description:(NSString*)description
 {
     self = [super init];
-    if (self) {
-        _text = [text retain];
-        _author = [author retain];
-        _url = [url retain];
-        _description = [description retain];
+    if (self) 
+    {
+        self.text = text;
+        self.author = author;
+        self.url = url;
+        self.description = description;
     }
     return self;
 }
