@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "Common.h"
-#import "Quoter.h"
 #import "WikiQuoteParser.h"
 
 #define LANG_RU @"ru"
@@ -18,7 +17,13 @@
 #define LANG_EN_INDEX @"en_index"
 
 #define WIKI_PAGES_COUNT 1
-#define QUOTES_HISTORY_SIZE 20
+#define QUOTES_HISTORY_SIZE 10
+
+@protocol WikiQuoterDelegate <NSObject>
+
+- (void) quotesAreAvailable;
+
+@end
 
 @interface WikiQuoter : NSObject 
 {
@@ -30,8 +35,11 @@
 @property (nonatomic, retain) NSString *language;
 @property (nonatomic, retain) WikiQuoteParser *parser;
 
+@property (nonatomic, assign) id<WikiQuoterDelegate> delegate;
+
 + (WikiQuoter *) sharedWikiQuoter;
 
 - (Quote *) getByIndex:(int) index;
+
 
 @end

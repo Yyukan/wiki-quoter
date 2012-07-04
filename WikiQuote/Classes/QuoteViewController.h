@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "WikiQuoter.h"
 
+@protocol QuoteViewControllerDelegate <NSObject>
+
+- (void) languageHasChanged:(NSString *)language;
+
+@end
+
 @interface QuoteViewController : UIViewController <UIScrollViewDelegate>
 {
 }
@@ -20,6 +26,9 @@
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 
 @property (nonatomic, retain) UIView *dropDownView;
+@property (nonatomic, retain) UIActivityIndicatorView *indicator;
+
+@property (nonatomic, assign) id<QuoteViewControllerDelegate, WikiQuoterDelegate> delegate;
 
 - (void) updateByIndex:(int) index;
 

@@ -11,6 +11,7 @@
 #import "WikiQuoter.h"
 
 #define DROP_DOWN_VIEW_HEIGHT 116
+#define STATUS_BAR_HEIGHT 20
 
 @implementation QuoteViewController
 
@@ -18,12 +19,13 @@
 @synthesize label = _label;
 @synthesize textView = _textView;
 @synthesize dropDownView = _dropDownView;
+@synthesize indicator = _indicator;
 
 @synthesize wikiQuoter = _wikiQuoter;
+@synthesize delegate = _delegate;
 
 #pragma mark -
 #pragma mark Initialization and memory management 
-
 
 - (void)dealloc 
 {
@@ -39,13 +41,13 @@
     if (_wikiQuoter == nil)
     {
         _wikiQuoter = [WikiQuoter sharedWikiQuoter];
+        _wikiQuoter.delegate = [self delegate];
     }
     return _wikiQuoter;
 }
 
 - (UIButton *)createButton:(CGRect)frame imageName:(NSString *)imageName title:(NSString *)title selector:(SEL) selector
 {
-    // ru language button 
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];    
     [button addTarget:self action:selector forControlEvents:UIControlEventTouchDown];
     [button setBackgroundColor:[UIColor clearColor]];
@@ -53,7 +55,7 @@
     [button setTitle:title forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont fontWithName:@"Philosopher" size:17]];
     [button setAutoresizingMask:UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
-    button.frame = frame;
+    [button setFrame:frame];
     return button;
 }
 
@@ -104,6 +106,11 @@
     
     // how to center text in text view, notify itself about content size changing
     [self.textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
+    
+    // activity indicator
+    self.indicator = [[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    self.indicator.center = self.view.center;
+    [self.view addSubview: self.indicator];
 }
 
 - (void)viewDidUnload
@@ -152,8 +159,8 @@
     }
      
     scrollView.contentSize = CGSizeMake(bounds.size.width, bounds.size.height + DROP_DOWN_VIEW_HEIGHT);
-    // 20 here is status bar size 
-    self.dropDownView.frame = CGRectMake(0, bounds.size.height + 20 , bounds.size.width, DROP_DOWN_VIEW_HEIGHT);
+
+    self.dropDownView.frame = CGRectMake(0, bounds.size.height + STATUS_BAR_HEIGHT , bounds.size.width, DROP_DOWN_VIEW_HEIGHT);
     
     return YES;
 }
@@ -161,7 +168,18 @@
 - (void) updateByIndex:(int) index
 {
     Quote *quote = [self.wikiQuoter getByIndex:index];
-    self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
+    
+    // TODO:yukan improve code  
+    if ([quote.text isEqual:@""])
+    {
+        [self.indicator startAnimating];
+    } 
+    else 
+    {
+        [self.indicator stopAnimating];
+    }
+    
+    self.label.text = [quote author];
     self.textView.text = [quote text];
 }
 
@@ -170,7 +188,7 @@
     if (![self.wikiQuoter.language isEqual:LANG_RU])
     {
         [self.wikiQuoter setLanguage:LANG_RU];
-        TRC_ENTRY
+        [self.delegate languageHasChanged:LANG_RU];
     }
 }
 
@@ -179,7 +197,7 @@
     if (![self.wikiQuoter.language isEqual:LANG_EN])
     {
         [self.wikiQuoter setLanguage:LANG_EN];
-        TRC_ENTRY
+        [self.delegate languageHasChanged:LANG_EN];
     }
 }
 

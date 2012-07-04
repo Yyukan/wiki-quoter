@@ -35,6 +35,7 @@
 - (QuoteViewController *) createViewController:(int)page
 {
     QuoteViewController *controller = [[QuoteViewController alloc] init];
+    [controller setDelegate:self];
     [self adjustFrame:controller page:page];
     return [controller autorelease];
 }
@@ -106,19 +107,6 @@
     // reposition to central page
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
     
-    // activity indicator
-    // TODO:yukan introduce indicator 
-//    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    activityIndicator.frame = CGRectMake(10.0, 0.0, 40.0, 40.0);
-//    activityIndicator.center = _currentView.imageView.center;
-//    [_currentView.imageView addSubview: activityIndicator];
-    
-//    CGAffineTransform transform = CGAffineTransformMakeScale(2.0f, 2.0f);
-//    activityIndicator.transform = transform;
-//
-//    [activityIndicator startAnimating];
-//    
-//    [activityIndicator release];
 }
 
 - (void)viewDidUnload 
@@ -176,9 +164,9 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self adjustFrame:self.previosView page:0];
-    [self adjustFrame:self.currentView page:1];
-    [self adjustFrame:self.nextView page:2];
+    [self adjustFrame:self.previosView page:PREVIOS_PAGE];
+    [self adjustFrame:self.currentView page:CURRENT_PAGE];
+    [self adjustFrame:self.nextView page:NEXT_PAGE];
     
     [self.currentView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     [self.previosView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
@@ -193,4 +181,42 @@
     return YES;
 }
 
+- (void)languageHasChanged:(NSString *)language
+{
+    TRC_DBG(@"Language has changed %@", language);
+
+    if ([language isEqual:LANG_RU])
+    {
+        _previosIndexEn = self.previosIndex;
+        _currentIndexEn = self.currentIndex;
+        _nextIndexEn = self.nextIndex;
+        
+        _previosIndex = _previosIndexRu;
+        _currentIndex = _currentIndexRu;
+        _nextIndex = _nextIndexRu;
+    }
+    else if ([language isEqual:LANG_EN])
+    {
+        _previosIndexRu = self.previosIndex;
+        _currentIndexRu = self.currentIndex;
+        _nextIndexRu = self.nextIndex;
+        
+        _previosIndex = _previosIndexEn;
+        _currentIndex = _currentIndexEn;
+        _nextIndex = _nextIndexEn;
+    }    
+    
+    // TODO:yukan this does not work
+    [self loadPageByIndex:_previosIndex onPage:PREVIOS_PAGE];
+	[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE];
+	[self loadPageByIndex:_nextIndex onPage:NEXT_PAGE];
+}
+
+- (void) quotesAreAvailable
+{
+    TRC_ENTRY
+    [self loadPageByIndex:_previosIndex onPage:PREVIOS_PAGE];
+	[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE];
+	[self loadPageByIndex:_nextIndex onPage:NEXT_PAGE];
+}
 @end

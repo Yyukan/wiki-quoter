@@ -95,7 +95,6 @@
 		F4DEDF671574006500BD77CB /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
 		F4DEDF6915740F4200BD77CB /* Quote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Quote.h; path = WikiAPI/Quote.h; sourceTree = "<group>"; };
 		F4DEDF6A15740F4200BD77CB /* Quote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Quote.m; path = WikiAPI/Quote.m; sourceTree = "<group>"; };
-		F4DEDF6D1574114A00BD77CB /* Quoter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Quoter.h; path = WikiAPI/Quoter.h; sourceTree = "<group>"; };
 		F4DEDF701574136100BD77CB /* WikiQuoter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiQuoter.h; path = WikiAPI/WikiQuoter.h; sourceTree = "<group>"; };
 		F4DEDF711574136100BD77CB /* WikiQuoter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiQuoter.m; path = WikiAPI/WikiQuoter.m; sourceTree = "<group>"; };
 		F4F3B2081577F407007AE88E /* WikiQuoteTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WikiQuoteTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -289,7 +288,6 @@
 			children = (
 				F4DEDF6915740F4200BD77CB /* Quote.h */,
 				F4DEDF6A15740F4200BD77CB /* Quote.m */,
-				F4DEDF6D1574114A00BD77CB /* Quoter.h */,
 				F4DEDF701574136100BD77CB /* WikiQuoter.h */,
 				F4DEDF711574136100BD77CB /* WikiQuoter.m */,
 				F4C48DA61588FD6600528F1D /* WikiQuoteParser.h */,

@@ -23,6 +23,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
 
 @synthesize langToQuotes = _langToQuotes;
 @synthesize parser = _parser;
+@synthesize delegate = _delegate;
 
 #pragma mark -
 #pragma Initialization and memory management
@@ -109,6 +110,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     {
         NSMutableArray *quotes = [self.langToQuotes objectForKey:self.language];
         [quotes addObjectsFromArray:parsed];
+        // notify that quotes are available
+        [self.delegate quotesAreAvailable];
     }   
 }
 
@@ -127,7 +130,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
         // load data from wiki page 
         [self loadQuotesFromWiki];
         // return empty quote 
-        return [[[Quote alloc] initWithText:@"no data" author:@"no data" url:@"" description:@""] autorelease];
+        return [[[Quote alloc] initWithText:@"" author:@"" url:@"" description:@""] autorelease];
     }
         
     int realIndex = index;
