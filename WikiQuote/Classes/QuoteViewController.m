@@ -110,11 +110,14 @@
     // activity indicator
     self.indicator = [[[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
     self.indicator.center = self.view.center;
+    self.indicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+    self.indicator.hidesWhenStopped = YES;
     [self.view addSubview: self.indicator];
 }
 
 - (void)viewDidUnload
 {
+    self.indicator = nil;
     self.dropDownView = nil;
     [super viewDidUnload];
 }
@@ -145,7 +148,6 @@
         
         self.textView.frame = textViewFrame;
         self.label.frame = labelViewFrame;
-
     }
     else if (UIInterfaceOrientationIsLandscape(interfaceOrientation))
     {
@@ -156,8 +158,9 @@
         
         self.textView.frame = textViewFrame;
         self.label.frame = labelViewFrame;
-    }
-     
+        
+    }    
+    
     scrollView.contentSize = CGSizeMake(bounds.size.width, bounds.size.height + DROP_DOWN_VIEW_HEIGHT);
 
     self.dropDownView.frame = CGRectMake(0, bounds.size.height + STATUS_BAR_HEIGHT , bounds.size.width, DROP_DOWN_VIEW_HEIGHT);
@@ -179,7 +182,7 @@
         [self.indicator stopAnimating];
     }
     
-    self.label.text = [quote author];
+    self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
     self.textView.text = [quote text];
 }
 
