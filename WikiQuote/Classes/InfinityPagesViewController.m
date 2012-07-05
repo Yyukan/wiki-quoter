@@ -111,6 +111,7 @@
 
 - (void)viewDidUnload 
 {
+    TRC_ENTRY
     self.scrollView = nil;
     [super viewDidUnload];
 }
@@ -219,4 +220,39 @@
 	[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE];
 	[self loadPageByIndex:_nextIndex onPage:NEXT_PAGE];
 }
+
+- (void) sendToTweetter:(Quote *) quote
+{
+    TWTweetComposeViewController *tweeter = [[TWTweetComposeViewController alloc] init];
+    [tweeter setInitialText:[NSString stringWithFormat:@"%@ - %@", quote.text, quote.author]];
+    [self presentModalViewController:tweeter animated:YES];
+    [tweeter release];
+}
+
+- (void) sendToEMail:(Quote *) quote
+{
+    MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
+    [controller.navigationBar setTintColor:[UIUtils colorFromHexString:@"#55707d"]];
+    [controller setMailComposeDelegate:self];
+    [controller setSubject:@"WikiQuoter"];
+    [controller setMessageBody:[NSString stringWithFormat:@"%@ <br/>- %@", quote.text, quote.author] isHTML:YES];
+    [self presentModalViewController:controller animated:YES];
+    [controller release];
+}
+
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void) sendToFacebook:(Quote *) quote
+{
+
+}
+
+- (void) sendToGooglePlus:(Quote *) quote
+{
+
+}
+
 @end

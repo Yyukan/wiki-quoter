@@ -11,5 +11,7 @@
 @interface UIUtils : NSObject
 
 + (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
++ (UIColor *) colorFromHexString:(NSString *)hexString;
+
 
 @end

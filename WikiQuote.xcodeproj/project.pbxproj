@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		F418DFA9159A348100AAEDE6 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F420AA2115767F5800CE9DC8 /* StringUtils.m */; };
 		F420AA2315767F5800CE9DC8 /* StringUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F420AA2115767F5800CE9DC8 /* StringUtils.m */; };
+		F4253C4E15A617F200EAA4E8 /* Twitter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4253C4D15A617F200EAA4E8 /* Twitter.framework */; };
+		F4253C5115A619DE00EAA4E8 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4253C5015A619DE00EAA4E8 /* MessageUI.framework */; };
 		F429369D156FEF2B0034F723 /* QuoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F429369C156FEF2B0034F723 /* QuoteViewController.m */; };
 		F42936A0156FF0250034F723 /* QuoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* QuoteViewController.xib */; };
 		F42936A8156FF6970034F723 /* v_frame_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A6156FF6970034F723 /* v_frame_iphone.png */; };
@@ -56,6 +58,8 @@
 		F420AA2015767F5800CE9DC8 /* StringUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringUtils.h; sourceTree = "<group>"; };
 		F420AA2115767F5800CE9DC8 /* StringUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringUtils.m; sourceTree = "<group>"; };
 		F420AA2215767F5800CE9DC8 /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		F4253C4D15A617F200EAA4E8 /* Twitter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Twitter.framework; path = System/Library/Frameworks/Twitter.framework; sourceTree = SDKROOT; };
+		F4253C5015A619DE00EAA4E8 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		F429369B156FEF2B0034F723 /* QuoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuoteViewController.h; sourceTree = "<group>"; };
 		F429369C156FEF2B0034F723 /* QuoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuoteViewController.m; sourceTree = "<group>"; };
 		F429369F156FF0250034F723 /* QuoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuoteViewController.xib; sourceTree = "<group>"; };
@@ -111,6 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4253C5115A619DE00EAA4E8 /* MessageUI.framework in Frameworks */,
+				F4253C4E15A617F200EAA4E8 /* Twitter.framework in Frameworks */,
 				F45F3FCD156EACD90077D01C /* UIKit.framework in Frameworks */,
 				F45F3FCF156EACD90077D01C /* Foundation.framework in Frameworks */,
 				F45F3FD1156EACD90077D01C /* CoreGraphics.framework in Frameworks */,
@@ -192,6 +198,8 @@
 		F45F3FCB156EACD90077D01C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4253C5015A619DE00EAA4E8 /* MessageUI.framework */,
+				F4253C4D15A617F200EAA4E8 /* Twitter.framework */,
 				F45F3FCC156EACD90077D01C /* UIKit.framework */,
 				F45F3FCE156EACD90077D01C /* Foundation.framework */,
 				F45F3FD0156EACD90077D01C /* CoreGraphics.framework */,

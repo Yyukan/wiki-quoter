@@ -5,12 +5,13 @@
 //  Created by Oleksandr Shtykhno on 24/05/2012.
 //  Copyright (c) 2012 shtykhno.net. All rights reserved.
 //
-
+#import <Twitter/Twitter.h>
+#import <MessageUI/MessageUI.h>
 #import <UIKit/UIKit.h>
 #import "QuoteViewController.h"
 #import "WikiQuoter.h"
 
-@interface InfinityPagesViewController : UIViewController<UIScrollViewDelegate, QuoteViewControllerDelegate, WikiQuoterDelegate>
+@interface InfinityPagesViewController : UIViewController<UIScrollViewDelegate, QuoteViewControllerDelegate, WikiQuoterDelegate, MFMailComposeViewControllerDelegate>
 {
     int _previosIndexRu;
     int _currentIndexRu;

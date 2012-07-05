@@ -5,7 +5,6 @@
 //  Created by Oleksandr Shtykhno on 25/05/2012.
 //  Copyright (c) 2012 shtykhno.net. All rights reserved.
 //
-
 #import "QuoteViewController.h"
 #import "Common.h"
 #import "WikiQuoter.h"
@@ -121,6 +120,7 @@
 
 - (void)viewDidUnload
 {
+    TRC_ENTRY
     self.indicator = nil;
     self.dropDownView = nil;
     [super viewDidUnload];
@@ -211,22 +211,34 @@
 
 - (IBAction)toFacebook:(id)sender
 {
-    TRC_ENTRY
+    if (self.quote && ![StringUtils isEmptyString:self.quote.text])
+    {
+        [self.delegate sendToFacebook:self.quote];
+    }    
 }
 
 - (IBAction)toTwitter:(id)sender
 {
-    TRC_ENTRY
+    if (self.quote && ![StringUtils isEmptyString:self.quote.text])
+    {
+        [self.delegate sendToTweetter:self.quote];
+    }    
 }
 
 - (IBAction)toEmail:(id)sender
 {
-    TRC_ENTRY
+    if (self.quote && ![StringUtils isEmptyString:self.quote.text])
+    {
+        [self.delegate sendToEMail:self.quote];
+    }
 }
 
 - (IBAction)toGooglePlus:(id)sender
 {
-    TRC_ENTRY
+    if (self.quote && ![StringUtils isEmptyString:self.quote.text])
+    {
+        [self.delegate sendToGooglePlus:self.quote];
+    }    
 }
 
 - (IBAction)authorTouched:(id)sender
