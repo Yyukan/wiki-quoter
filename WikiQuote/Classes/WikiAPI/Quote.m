@@ -12,20 +12,20 @@
 
 @synthesize text = _text;
 @synthesize author = _author;
-@synthesize url = _url;
+@synthesize identifier = _identifier;
 @synthesize description = _description;
 
 #pragma mark -
 #pragma mark Initialization and memory management 
 
-- (id)initWithText:(NSString*)text author:(NSString*)author url:(NSString*)url description:(NSString*)description
+- (id)initWithText:(NSString*)text author:(NSString*)author identifier:(NSString*)identifier description:(NSString*)description
 {
     self = [super init];
     if (self) 
     {
         self.text = text;
         self.author = author;
-        self.url = url;
+        self.identifier = identifier;
         self.description = description;
     }
     return self;
@@ -33,7 +33,7 @@
 
 + (Quote *) quoteWithText:(NSString *)text fromAuthor:(NSString *)author
 {
-    Quote *quote = [[Quote alloc] initWithText:text author:author url:nil description:nil];
+    Quote *quote = [[Quote alloc] initWithText:text author:author identifier:nil description:nil];
     return [quote autorelease];
 }
 
@@ -41,7 +41,7 @@
 {
     [_text release];
     [_author release];
-    [_url release];
+    [_identifier release];
     [_description release];
     
     [super dealloc];

@@ -19,9 +19,10 @@
 {
 }
 
+@property (nonatomic, retain) Quote *quote;
 @property (nonatomic, assign) WikiQuoter *wikiQuoter;
 
-@property (nonatomic, retain) IBOutlet UILabel *label;
+@property (nonatomic, retain) IBOutlet UIButton *label;
 @property (nonatomic, retain) IBOutlet UITextView *textView;
 @property (nonatomic, retain) IBOutlet UIImageView *imageView;
 

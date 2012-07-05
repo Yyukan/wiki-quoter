@@ -68,6 +68,17 @@
 //=========================================================== 
 // Parsing XML asynchronously
 //=========================================================== 
+
+//
+//   <page>
+//      <title>Title text</title>
+//      <ns>0</ns>
+//      <id>4502</id>
+//      <revision><id>133655</id>
+//      <text>Some text</text>
+//      ...
+//   </page>
+
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName
   namespaceURI:(NSString *)namespaceURI qualifiedName:(NSString *)qualifiedName
     attributes:(NSDictionary *)attributeDict 
@@ -80,11 +91,19 @@
     {
         textElement = YES;
     }  
+    else if ([@"revision" isEqual:elementName])
+    {
+        revisionElement = YES;
+    }  
+    else if ([@"id" isEqual:elementName] && !revisionElement)
+    {
+        idElement = YES;
+    }
 }
 
 - (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string 
 {
-    if (titleElement || textElement)
+    if (titleElement || textElement || idElement)
     {
         if(!currentElement)
         {
@@ -117,6 +136,19 @@
         currentElement = nil;
         textElement = NO;
     }
+    else if ([@"id" isEqual:elementName] && !revisionElement)
+    {
+        identifier = [NSString stringWithString:currentElement];
+        
+        [currentElement release];
+        currentElement = nil;
+        idElement = NO;
+    }
+    else if ([@"revision" isEqual:elementName])
+    {
+        revisionElement = NO;
+    }
+    
 }    
 
 - (NSString *) cleanTitle:(NSString *)text
@@ -146,7 +178,7 @@
             continue;
         }
         
-        Quote *quote = [[Quote alloc] initWithText:cleanedQuote author:cleanedTitle url:@"" description:@""];
+        Quote *quote = [[Quote alloc] initWithText:cleanedQuote author:cleanedTitle identifier:identifier description:@""];
         
         [result addObject:quote];
 

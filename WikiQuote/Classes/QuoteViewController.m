@@ -21,6 +21,7 @@
 @synthesize dropDownView = _dropDownView;
 @synthesize indicator = _indicator;
 
+@synthesize quote = _quote;
 @synthesize wikiQuoter = _wikiQuoter;
 @synthesize delegate = _delegate;
 
@@ -29,6 +30,7 @@
 
 - (void)dealloc 
 {
+    [_quote release];
     [_dropDownView release];
     [_label release];
     [_textView release];
@@ -101,8 +103,10 @@
 
     self.view.backgroundColor = [UIColor clearColor];
     
-    self.label.font = [UIFont fontWithName:@"Philosopher" size:17];
-    self.textView.font = [UIFont fontWithName:@"Philosopher" size:23];
+    [self.label.titleLabel setFont:[UIFont fontWithName:@"Philosopher" size:17]];
+    [self.label addTarget:self action:@selector(authorTouched:) forControlEvents:UIControlEventTouchDown];
+
+    [self.textView setFont:[UIFont fontWithName:@"Philosopher" size:23]];
     
     // how to center text in text view, notify itself about content size changing
     [self.textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
@@ -170,10 +174,11 @@
 
 - (void) updateByIndex:(int) index
 {
-    Quote *quote = [self.wikiQuoter getByIndex:index];
+    self.quote = [self.wikiQuoter getByIndex:index];
+    
     
     // TODO:yukan improve code  
-    if ([quote.text isEqual:@""])
+    if ([self.quote.text isEqual:@""])
     {
         [self.indicator startAnimating];
     } 
@@ -182,8 +187,8 @@
         [self.indicator stopAnimating];
     }
     
-    self.label.text = [NSString stringWithFormat:@"%i %@", index, [quote author]];
-    self.textView.text = [quote text];
+    [self.label setTitle:[NSString stringWithFormat:@"%i %@", index, self.quote.author] forState:UIControlStateNormal];
+    [self.textView setText:self.quote.text];
 }
 
 - (IBAction)ruLanguageButtonPressed:(id)sender
@@ -224,6 +229,15 @@
     TRC_ENTRY
 }
 
+- (IBAction)authorTouched:(id)sender
+{
+    if (self.quote && ![StringUtils isEmptyString:self.quote.identifier])
+    {
+        NSString *url = [NSString stringWithFormat:@"http://%@.wikiquote.org/?curid=%@", self.wikiQuoter.language, self.quote.identifier];
+        
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: url]];
+    }
+}
 @end
 
 

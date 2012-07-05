@@ -12,16 +12,16 @@
 {
     NSString *_text;
     NSString *_author;
-    NSString *_url;
+    NSString *_identifier;
     NSString *_description;
 }
 
 @property (nonatomic, retain) NSString *text;
 @property (nonatomic, retain) NSString *author;
-@property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NSString *identifier;
 @property (nonatomic, retain) NSString *description;
 
-- (id)initWithText:(NSString*)text author:(NSString*)author url:(NSString*)url description:(NSString*)description;
+- (id)initWithText:(NSString*)text author:(NSString*)author identifier:(NSString*)identifier description:(NSString*)description;
 
 + (Quote *) quoteWithText:(NSString *)text fromAuthor:(NSString *)author;
 

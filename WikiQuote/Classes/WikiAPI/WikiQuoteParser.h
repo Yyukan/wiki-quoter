@@ -15,9 +15,12 @@
     
     BOOL titleElement;
     BOOL textElement;
+    BOOL idElement;
+    BOOL revisionElement;
     
     NSMutableString *currentElement;
     NSString *title;
+    NSString *identifier;
 }
 @property (nonatomic, retain) NSMutableArray *quotes;
 

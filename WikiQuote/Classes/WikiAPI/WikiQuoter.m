@@ -130,7 +130,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
         // load data from wiki page 
         [self loadQuotesFromWiki];
         // return empty quote 
-        return [[[Quote alloc] initWithText:@"" author:@"" url:@"" description:@""] autorelease];
+        return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
     }
         
     int realIndex = index;
