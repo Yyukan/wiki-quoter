@@ -10,8 +10,9 @@
 #import <UIKit/UIKit.h>
 #import "QuoteViewController.h"
 #import "WikiQuoter.h"
+#import "FBConnect.h"
 
-@interface InfinityPagesViewController : UIViewController<UIScrollViewDelegate, QuoteViewControllerDelegate, WikiQuoterDelegate, MFMailComposeViewControllerDelegate>
+@interface InfinityPagesViewController : UIViewController<UIScrollViewDelegate, QuoteViewControllerDelegate, WikiQuoterDelegate, MFMailComposeViewControllerDelegate, FBSessionDelegate, FBRequestDelegate>
 {
     int _previosIndexRu;
     int _currentIndexRu;
@@ -29,5 +30,8 @@
 @property (nonatomic, assign) int nextIndex;
 
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+
+/** facebook property */
+@property (nonatomic, retain) Facebook *facebook;
 
 @end

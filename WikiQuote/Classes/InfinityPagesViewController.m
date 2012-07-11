@@ -12,6 +12,8 @@
 #define CURRENT_PAGE 1
 #define NEXT_PAGE 2
 
+#define FACEBOOK_APP_ID @"247204855382301"
+
 @implementation InfinityPagesViewController
 
 @synthesize scrollView = _scrollView;
@@ -23,6 +25,8 @@
 @synthesize previosIndex = _previosIndex;
 @synthesize currentIndex = _currentIndex;
 @synthesize nextIndex = _nextIndex;
+
+@synthesize facebook = _facebook;
 
 - (void) adjustFrame:(QuoteViewController *) controller page:(int)page
 {
@@ -50,11 +54,21 @@
 
 - (void)dealloc 
 {
+    [_facebook release];
     [_previosView release];
     [_currentView release];
     [_nextView release];
     [_scrollView release];
     [super dealloc];
+}
+
+- (Facebook *)facebook
+{
+    if (!_facebook)
+    {
+        self.facebook = [[[Facebook alloc] initWithAppId:FACEBOOK_APP_ID andDelegate:self] autorelease];
+    }
+    return _facebook;
 }
 
 - (void)loadPageByIndex:(int)index onPage:(int)page 
@@ -247,12 +261,105 @@
 
 - (void) sendToFacebook:(Quote *) quote
 {
-
+    if (![self.facebook isSessionValid]) 
+    {
+        // if user is not logged in
+        [self.facebook authorize:[NSArray arrayWithObjects:@"read_stream", @"publish_stream", nil]];
+    } 
+    else 
+    {
+        NSString *text = [NSString stringWithFormat:@"%@ - %@", quote.text, quote.author];
+        
+        
+        // Create the parameters dictionary that will keep the data that will be posted.
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       @"My test app", @"name",
+                                       @"WikiQuote app for iPhone!", @"caption",
+                                       @"This is a description of my app", @"description",
+                                       text, @"message",              
+                                       nil];
+        
+        // this is the most important method that you call. It does the actual job, the message posting.
+        [self.facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
+        TRC_ENTRY
+    }
 }
 
 - (void) sendToGooglePlus:(Quote *) quote
 {
 
 }
+
+/**
+ * Facebook delegate
+ */
+- (void)fbDidLogin 
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
+    [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
+    [defaults synchronize];
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+
+}
+
+- (void)fbDidExtendToken:(NSString*)accessToken
+               expiresAt:(NSDate*)expiresAt;
+{
+
+}
+
+- (void) fbDidLogout 
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if ([defaults objectForKey:@"FBAccessTokenKey"]) 
+    {
+        [defaults removeObjectForKey:@"FBAccessTokenKey"];
+        [defaults removeObjectForKey:@"FBExpirationDateKey"];
+        [defaults synchronize];
+    }
+}
+- (void)fbSessionInvalidated
+{
+    TRC_ENTRY
+    [self fbDidLogout];
+}
+
+-(void)request:(FBRequest *)request didReceiveResponse:(NSURLResponse *)response 
+{
+    TRC_ENTRY
+}
+
+-(void)request:(FBRequest *)request didLoad:(id)result
+{
+    TRC_ENTRY
+    // With this method we’ll get any Facebook response in the form of an array.
+    // In this example the method will be used twice. Once to get the user’s name to
+    // when showing the welcome message and next to get the ID of the published post.
+    // Inside the result array there the data is stored as a NSDictionary.    
+    if ([result isKindOfClass:[NSArray class]]) {
+        // The first object in the result is the data dictionary.
+        result = [result objectAtIndex:0];
+    }
+    
+    if ([result objectForKey:@"id"]) {
+        
+        // If the result contains the "id" key then the data have been posted and the id of the published post have been returned.
+        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"My test app" message:@"Your message has been posted on your wall!" 
+                                                    delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+        [al show];
+        [al release];
+    }
+}
+
+
+-(void)request:(FBRequest *)request didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", [error localizedDescription]);
+}
+
 
 @end

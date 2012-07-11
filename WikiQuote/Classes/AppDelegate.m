@@ -31,10 +31,10 @@
     } else {
         self.viewController = [[[InfinityPagesViewController alloc] initWithNibName:@"ViewController_iPad" bundle:nil] autorelease];
     }
-    self.window.rootViewController = self.viewController;
     
+    [self.window setRootViewController:self.viewController];
     [self.window makeKeyAndVisible];
-    
+
     return YES;
 }
 
@@ -76,6 +76,15 @@
      See also applicationDidEnterBackground:.
      */
     
+}
+
+/**
+ * Methods will respond to the openURL call that will be made by the Facebook login window.
+ */
+- (BOOL)application:(UIApplication *)application openURL:(NSURL*)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation 
+{
+    TRC_ENTRY
+    return [[_viewController facebook] handleOpenURL:url];
 }
 
 @end
