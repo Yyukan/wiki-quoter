@@ -60,6 +60,9 @@
     return button;
 }
 
+/**
+ * Buttons 20,100,180,260 
+ */
 - (void) initDropDownView:(CGRect) bounds
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, bounds.size.height + 20 , bounds.size.width, DROP_DOWN_VIEW_HEIGHT)];
@@ -73,8 +76,7 @@
     [self.dropDownView addSubview:[self createButton:CGRectMake(165, 60, 148, 30) imageName:@"lang_button" title:@"IN ENGLISH" selector:@selector(enLanguageButtonPressed:)]];
 
     [self.dropDownView addSubview:[self createButton:CGRectMake(20, 10, 40, 40) imageName:@"facebook_iphone" title:nil selector:@selector(toFacebook:)]];
-    [self.dropDownView addSubview:[self createButton:CGRectMake(100, 10, 40, 40) imageName:@"twitter_iphone" title:nil selector:@selector(toTwitter:)]];
-    [self.dropDownView addSubview:[self createButton:CGRectMake(180, 10, 40, 40) imageName:@"googleplus_iphone" title:nil selector:@selector(toGooglePlus:)]];
+    [self.dropDownView addSubview:[self createButton:CGRectMake(140, 10, 40, 40) imageName:@"twitter_iphone" title:nil selector:@selector(toTwitter:)]];
     [self.dropDownView addSubview:[self createButton:CGRectMake(260, 10, 40, 40) imageName:@"email_iphone" title:nil selector:@selector(toEmail:)]];
 }
 
@@ -191,6 +193,11 @@
     [self.textView setText:self.quote.text];
 }
 
+- (void) reload
+{
+    [self.wikiQuoter reload];
+}
+
 - (IBAction)ruLanguageButtonPressed:(id)sender
 {
     if (![self.wikiQuoter.language isEqual:LANG_RU])
@@ -231,14 +238,6 @@
     {
         [self.delegate sendToEMail:self.quote];
     }
-}
-
-- (IBAction)toGooglePlus:(id)sender
-{
-    if (self.quote && ![StringUtils isEmptyString:self.quote.text])
-    {
-        [self.delegate sendToGooglePlus:self.quote];
-    }    
 }
 
 - (IBAction)authorTouched:(id)sender

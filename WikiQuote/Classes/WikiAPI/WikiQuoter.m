@@ -115,6 +115,18 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     }   
 }
 
+- (void)reload
+{
+    // reset all quotes for current language    
+    NSMutableArray *quotes = [self.langToQuotes objectForKey:self.language];
+    [quotes removeAllObjects];
+    // reset correction index 
+    NSString *key = [NSString stringWithFormat:@"%@_index", self.language];
+    [self.langToQuotes setValue:[NSNumber numberWithInt:0] forKey:key];
+    
+    [self loadQuotesFromWiki]; 
+}
+
 - (Quote *) getByIndex:(int) index
 {
     NSMutableArray *quotes = [self.langToQuotes objectForKey:self.language];

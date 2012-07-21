@@ -14,7 +14,6 @@
 - (void) sendToTweetter:(Quote *) quote;
 - (void) sendToEMail:(Quote *) quote;
 - (void) sendToFacebook:(Quote *) quote;
-- (void) sendToGooglePlus:(Quote *) quote;
 
 @end
 
@@ -35,5 +34,5 @@
 @property (nonatomic, assign) id<QuoteViewControllerDelegate, WikiQuoterDelegate> delegate;
 
 - (void) updateByIndex:(int) index;
-
+- (void) reload;
 @end

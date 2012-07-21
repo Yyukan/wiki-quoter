@@ -40,6 +40,6 @@
 + (WikiQuoter *) sharedWikiQuoter;
 
 - (Quote *) getByIndex:(int) index;
-
+- (void) reload;
 
 @end

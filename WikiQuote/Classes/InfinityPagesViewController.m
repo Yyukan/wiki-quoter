@@ -104,23 +104,27 @@
     _scrollView.showsHorizontalScrollIndicator = NO;
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.delegate = self;
+    _scrollView.scrollEnabled = NO;
 
     [_scrollView addSubview:_previosView.view];
 	[_scrollView addSubview:_currentView.view];
 	[_scrollView addSubview:_nextView.view];
-    
-    [self loadPageByIndex:9 onPage:PREVIOS_PAGE];
-	[self loadPageByIndex:0 onPage:CURRENT_PAGE];
-	[self loadPageByIndex:1 onPage:NEXT_PAGE];
-    
+
     [UIUtils setBackgroundImage:self.view image:@"background@2x"];
 
     // adjust content size for three pages
-	[_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width * 3, _scrollView.frame.size.height)];	
+	[_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width * 3 , _scrollView.frame.size.height)];	
     
     // reposition to central page
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
     
+    // initialize all indexes for previos, current and next pages
+    self.previosIndex = -1;
+    self.currentIndex = 0;
+    self.nextIndex = 1;
+
+    // load only current page
+	[self loadPageByIndex:self.currentIndex onPage:CURRENT_PAGE];
 }
 
 - (void)viewDidUnload 
@@ -130,26 +134,54 @@
     [super viewDidUnload];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)sender 
+-(BOOL)canBecomeFirstResponder 
 {
-//    TRC_ENTRY
-//    int scrollDirection;
-//    if (lastContentOffset > sender.contentOffset.x)
-//        scrollDirection = RIGHT;
-//    else if (lastContentOffset < scrollView.contentOffset.x) 
-//        scrollDirection = LEFT;
-//    
-//    lastContentOffset = scrollView.contentOffset.x;
-//    
+    return YES;
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    // check if device has been shaked 
+    if (motion == UIEventSubtypeMotionShake) 
+    {
+        _scrollView.scrollEnabled = NO;
+        // reset all indexes to default values    
+        self.previosIndex = -1;
+        self.currentIndex = 0;
+        self.nextIndex = 1;
+        
+        // reload current view (reset all quotes cache)
+        [self.currentView reload]; 
+        
+        // load current page and next page
+        [self loadPageByIndex:self.currentIndex onPage:CURRENT_PAGE];
+    }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-    TRC_ENTRY
+    TRC_DBG(@"X = %f", scrollView.contentOffset.x);
+    if (self.currentIndex == 0 && scrollView.contentOffset.x < _scrollView.frame.size.width) 
+    {
+        TRC_ENTRY
+        [scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
+    }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)sender 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView 
 {
+    TRC_DBG(@"X = %f", scrollView.contentOffset.x);
+    if (self.currentIndex == 0 && scrollView.contentOffset.x < _scrollView.frame.size.width) 
+    {
+        TRC_ENTRY
+        [scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
+    }
+    
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView 
+{
+    TRC_DBG(@"X = %f", scrollView.contentOffset.x);
 	if(_scrollView.contentOffset.x > _scrollView.frame.size.width) 
     {
 		[self loadPageByIndex:_currentIndex onPage:PREVIOS_PAGE];         
@@ -230,9 +262,17 @@
 - (void) quotesAreAvailable
 {
     TRC_ENTRY
-    [self loadPageByIndex:_previosIndex onPage:PREVIOS_PAGE];
-	[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE];
-	[self loadPageByIndex:_nextIndex onPage:NEXT_PAGE];
+    if (self.previosIndex >= 0)
+    {
+        [self loadPageByIndex:self.previosIndex onPage:PREVIOS_PAGE];
+    }    
+	[self loadPageByIndex:self.currentIndex onPage:CURRENT_PAGE];
+	[self loadPageByIndex:self.nextIndex onPage:NEXT_PAGE];
+
+    if (!self.scrollView.scrollEnabled) 
+    {
+        self.scrollView.scrollEnabled = YES;
+    }
 }
 
 - (void) sendToTweetter:(Quote *) quote
@@ -259,12 +299,27 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+- (void)doSendToFacebook:(NSDictionary *)dictionary 
+{
+    NSMutableDictionary *parameters = [dictionary objectForKey:@"parameters"];
+    NSString *encodedToken = [self.facebook.accessToken stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *graphPath = [NSString stringWithFormat:@"me/feed?access_token=%@", encodedToken];
+    [self.facebook requestWithGraphPath:graphPath
+                              andParams:parameters 
+                          andHttpMethod:@"POST" 
+                            andDelegate:self];
+    TRC_DBG(@"Sent post message to the wall");
+}
+
+
 - (void) sendToFacebook:(Quote *) quote
 {
     if (![self.facebook isSessionValid]) 
     {
         // if user is not logged in
         [self.facebook authorize:[NSArray arrayWithObjects:@"read_stream", @"publish_stream", nil]];
+        
+        
     } 
     else 
     {
@@ -272,22 +327,15 @@
         
         
         // Create the parameters dictionary that will keep the data that will be posted.
-        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                        @"My test app", @"name",
                                        @"WikiQuote app for iPhone!", @"caption",
                                        @"This is a description of my app", @"description",
                                        text, @"message",              
                                        nil];
         
-        // this is the most important method that you call. It does the actual job, the message posting.
-        [self.facebook requestWithGraphPath:@"me/feed" andParams:params andHttpMethod:@"POST" andDelegate:self];
-        TRC_ENTRY
+        [self doSendToFacebook:parameters];
     }
-}
-
-- (void) sendToGooglePlus:(Quote *) quote
-{
-
 }
 
 /**
