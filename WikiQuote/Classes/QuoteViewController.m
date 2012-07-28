@@ -178,7 +178,6 @@
 {
     self.quote = [self.wikiQuoter getByIndex:index];
     
-    
     // TODO:yukan improve code  
     if ([self.quote.text isEqual:@""])
     {

@@ -8,9 +8,9 @@
 
 #import "InfinityPagesViewController.h"
 
-#define PREVIOS_PAGE 0
-#define CURRENT_PAGE 1
-#define NEXT_PAGE 2
+#define PAGE_PREVIOS 0
+#define PAGE_CURRENT 1
+#define PAGE_NEXT 2
 
 #define FACEBOOK_APP_ID @"247204855382301"
 
@@ -76,13 +76,13 @@
 	// load data for page
 	switch (page) 
     {
-		case PREVIOS_PAGE:
+		case PAGE_PREVIOS:
 			[self.previosView updateByIndex:index];
 			break;
-		case CURRENT_PAGE:
+		case PAGE_CURRENT:
             [self.currentView updateByIndex:index];
 			break;
-		case NEXT_PAGE:
+		case PAGE_NEXT:
             [self.nextView updateByIndex:index];
 			break;
 	}	
@@ -96,19 +96,19 @@
     [super viewDidLoad];
     
     // create placeholders for each of our documents
-	self.previosView = [self createViewController:PREVIOS_PAGE];
-	self.currentView = [self createViewController:CURRENT_PAGE];
-	self.nextView = [self createViewController:NEXT_PAGE];
+	self.previosView = [self createViewController:PAGE_PREVIOS];
+	self.currentView = [self createViewController:PAGE_CURRENT];
+	self.nextView = [self createViewController:PAGE_NEXT];
 
-    _scrollView.pagingEnabled = YES;
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.delegate = self;
-    _scrollView.scrollEnabled = NO;
+    self.scrollView.pagingEnabled = YES;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.delegate = self;
+    self.scrollView.scrollEnabled = NO;
 
-    [_scrollView addSubview:_previosView.view];
-	[_scrollView addSubview:_currentView.view];
-	[_scrollView addSubview:_nextView.view];
+    [self.scrollView addSubview:_previosView.view];
+	[self.scrollView addSubview:_currentView.view];
+	[self.scrollView addSubview:_nextView.view];
 
     [UIUtils setBackgroundImage:self.view image:@"background@2x"];
 
@@ -122,9 +122,19 @@
     self.previosIndex = -1;
     self.currentIndex = 0;
     self.nextIndex = 1;
+    
+    _previosIndexRu = -1;
+    _currentIndexRu = 0;
+    _nextIndexRu = 1;
 
-    // load only current page
-	[self loadPageByIndex:self.currentIndex onPage:CURRENT_PAGE];
+    _previosIndexEn = -1;
+    _currentIndexEn = 0;
+    _nextIndexEn = 1;
+
+    // load current page
+	[self loadPageByIndex:self.currentIndex onPage:PAGE_CURRENT];
+    // load next page
+	[self loadPageByIndex:self.nextIndex onPage:PAGE_NEXT];
 }
 
 - (void)viewDidUnload 
@@ -134,17 +144,19 @@
     [super viewDidUnload];
 }
 
--(BOOL)canBecomeFirstResponder 
+// to intercept shaking motion
+- (BOOL)canBecomeFirstResponder
 {
     return YES;
 }
 
+// method is called when device is shaking
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
 {
     // check if device has been shaked 
     if (motion == UIEventSubtypeMotionShake) 
     {
-        _scrollView.scrollEnabled = NO;
+        self.scrollView.scrollEnabled = NO;
         // reset all indexes to default values    
         self.previosIndex = -1;
         self.currentIndex = 0;
@@ -154,66 +166,53 @@
         [self.currentView reload]; 
         
         // load current page and next page
-        [self loadPageByIndex:self.currentIndex onPage:CURRENT_PAGE];
+        [self loadPageByIndex:self.currentIndex onPage:PAGE_CURRENT];
+        [self loadPageByIndex:self.nextIndex onPage:PAGE_NEXT];
     }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    TRC_DBG(@"X = %f", scrollView.contentOffset.x);
-    if (self.currentIndex == 0 && scrollView.contentOffset.x < _scrollView.frame.size.width) 
+    if (self.currentIndex == 0)
     {
-        TRC_ENTRY
-        [scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
+        // contect offset is changing to the left
+        if (scrollView.contentOffset.x < _scrollView.frame.size.width)
+        {
+            // disable scrolling to the left
+            scrollView.bounces = NO;
+            [scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0) animated:NO];
+        }
     }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView 
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    TRC_DBG(@"X = %f", scrollView.contentOffset.x);
-    if (self.currentIndex == 0 && scrollView.contentOffset.x < _scrollView.frame.size.width) 
+	if(_scrollView.contentOffset.x > _scrollView.frame.size.width)
     {
-        TRC_ENTRY
-        [scrollView setContentOffset:CGPointMake(_scrollView.frame.size.width, 0)];
-    }
-    
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView 
-{
-    TRC_DBG(@"X = %f", scrollView.contentOffset.x);
-	if(_scrollView.contentOffset.x > _scrollView.frame.size.width) 
-    {
-		[self loadPageByIndex:_currentIndex onPage:PREVIOS_PAGE];         
-        
+        _previosIndex++;
 		_currentIndex++;
-        
-		[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE];         
-        
-		_nextIndex = _currentIndex + 1;         
-		[self loadPageByIndex:_nextIndex onPage:NEXT_PAGE];
-	}     
+		_nextIndex++;
+	}
 	if(_scrollView.contentOffset.x < _scrollView.frame.size.width) 
-    {         
-		[self loadPageByIndex:_currentIndex onPage:NEXT_PAGE];         
-        
-		_currentIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;         
-		[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE]; 
-        
-		_previosIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;         
-
-		[self loadPageByIndex:_previosIndex onPage:PREVIOS_PAGE];     
-	}     
+    {
+		_previosIndex = (_previosIndex == -1) ? -1 : _previosIndex - 1;
+		_currentIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;
+		_nextIndex = (_nextIndex == 1) ? 1 : _nextIndex - 1;
+	}
 	
-	// reset offset back to middle page     
+    [self loadPageByIndex:_previosIndex onPage:PAGE_PREVIOS];
+    [self loadPageByIndex:_currentIndex onPage:PAGE_CURRENT];
+    [self loadPageByIndex:_nextIndex onPage:PAGE_NEXT];
+    
+	// reset offset back to middle page
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self adjustFrame:self.previosView page:PREVIOS_PAGE];
-    [self adjustFrame:self.currentView page:CURRENT_PAGE];
-    [self adjustFrame:self.nextView page:NEXT_PAGE];
+    [self adjustFrame:self.previosView page:PAGE_PREVIOS];
+    [self adjustFrame:self.currentView page:PAGE_CURRENT];
+    [self adjustFrame:self.nextView page:PAGE_NEXT];
     
     [self.currentView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
     [self.previosView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
@@ -253,10 +252,9 @@
         _nextIndex = _nextIndexEn;
     }    
     
-    // TODO:yukan this does not work
-    [self loadPageByIndex:_previosIndex onPage:PREVIOS_PAGE];
-	[self loadPageByIndex:_currentIndex onPage:CURRENT_PAGE];
-	[self loadPageByIndex:_nextIndex onPage:NEXT_PAGE];
+    [self loadPageByIndex:_previosIndex onPage:PAGE_PREVIOS];
+	[self loadPageByIndex:_currentIndex onPage:PAGE_CURRENT];
+	[self loadPageByIndex:_nextIndex onPage:PAGE_NEXT];
 }
 
 - (void) quotesAreAvailable
@@ -264,10 +262,10 @@
     TRC_ENTRY
     if (self.previosIndex >= 0)
     {
-        [self loadPageByIndex:self.previosIndex onPage:PREVIOS_PAGE];
+        [self loadPageByIndex:self.previosIndex onPage:PAGE_PREVIOS];
     }    
-	[self loadPageByIndex:self.currentIndex onPage:CURRENT_PAGE];
-	[self loadPageByIndex:self.nextIndex onPage:NEXT_PAGE];
+	[self loadPageByIndex:self.currentIndex onPage:PAGE_CURRENT];
+	[self loadPageByIndex:self.nextIndex onPage:PAGE_NEXT];
 
     if (!self.scrollView.scrollEnabled) 
     {
@@ -289,7 +287,7 @@
     [controller.navigationBar setTintColor:[UIUtils colorFromHexString:@"#55707d"]];
     [controller setMailComposeDelegate:self];
     [controller setSubject:@"WikiQuoter"];
-    [controller setMessageBody:[NSString stringWithFormat:@"%@ <br/>- %@", quote.text, quote.author] isHTML:YES];
+    [controller setMessageBody:[NSString stringWithFormat:@"%@ <br/> (%@)", quote.text, quote.author] isHTML:YES];
     [self presentModalViewController:controller animated:YES];
     [controller release];
 }

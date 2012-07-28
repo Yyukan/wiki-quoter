@@ -144,7 +144,12 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
         // return empty quote 
         return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
     }
-        
+
+    if (index < 0)
+    {
+        return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
+    }
+    
     int realIndex = index;
     
     if ((index - correctionIndex) > (QUOTES_HISTORY_SIZE / 2))
@@ -163,6 +168,8 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     if (realIndex > size - (QUOTES_HISTORY_SIZE / 2))
     {
         [self loadQuotesFromWiki];
+        // return empty quote 
+        return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
     }
     
     TRC_DBG(@"Requested index %i real index %i correction %i", index, realIndex, correctionIndex);

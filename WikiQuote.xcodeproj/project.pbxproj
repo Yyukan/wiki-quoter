@@ -458,7 +458,7 @@
 		F45F3FBF156EACD90077D01C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = shtykhno.net;
 			};
 			buildConfigurationList = F45F3FC2156EACD90077D01C /* Build configuration list for PBXProject "WikiQuote" */;
