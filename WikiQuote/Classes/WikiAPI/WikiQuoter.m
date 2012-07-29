@@ -38,8 +38,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
         self.langToQuotes = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                              [NSMutableArray arrayWithCapacity:QUOTES_HISTORY_SIZE], LANG_RU, 
                              [NSMutableArray arrayWithCapacity:QUOTES_HISTORY_SIZE], LANG_EN, 
-                             [NSNumber numberWithInt:0], LANG_RU_INDEX,
-                             [NSNumber numberWithInt:0], LANG_EN_INDEX,
                              nil];
         self.language = LANG_RU;
     }
@@ -120,9 +118,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
     // reset all quotes for current language    
     NSMutableArray *quotes = [self.langToQuotes objectForKey:self.language];
     [quotes removeAllObjects];
-    // reset correction index 
-    NSString *key = [NSString stringWithFormat:@"%@_index", self.language];
-    [self.langToQuotes setValue:[NSNumber numberWithInt:0] forKey:key];
     
     [self loadQuotesFromWiki]; 
 }
@@ -130,10 +125,6 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
 - (Quote *) getByIndex:(int) index
 {
     NSMutableArray *quotes = [self.langToQuotes objectForKey:self.language];
-    NSString *key = [NSString stringWithFormat:@"%@_index", self.language];
-    NSNumber *number = [self.langToQuotes objectForKey:key];
-    
-    int correctionIndex = [number intValue];
 
     int size = [quotes count];
 
@@ -142,39 +133,39 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
         // load data from wiki page 
         [self loadQuotesFromWiki];
         // return empty quote 
-        return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
+        return [Quote emptyQuote];
     }
 
     if (index < 0)
     {
-        return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
+        return [Quote emptyQuote];
     }
     
-    int realIndex = index;
-    
-    if ((index - correctionIndex) > (QUOTES_HISTORY_SIZE / 2))
-    {
-        [quotes removeObjectAtIndex:0];
-        correctionIndex++;
-    }
-    realIndex -= correctionIndex;
-    
-    if (realIndex < 0)
-    {
-        realIndex = 0;
-        correctionIndex--;
-    }
-    
-    if (realIndex > size - (QUOTES_HISTORY_SIZE / 2))
+    if (index > size - (QUOTES_HISTORY_SIZE / 2))
     {
         [self loadQuotesFromWiki];
-        // return empty quote 
-        return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
+        // return empty quote
+        return [Quote emptyQuote];
     }
     
-    TRC_DBG(@"Requested index %i real index %i correction %i", index, realIndex, correctionIndex);
+    if (_shiftIsNeeded && index == QUOTES_HISTORY_SIZE - 1)
+    {
+        [quotes removeObjectAtIndex:0];
+        TRC_DBG(@"Shifted quotes");
+    }
+    else
+    {
+        _shiftIsNeeded = NO;
+    }
     
-    [self.langToQuotes setValue:[NSNumber numberWithInt:correctionIndex] forKey:key];
-    return [quotes objectAtIndex:realIndex];
+    TRC_DBG(@"Requested index %i", index);
+    Quote *result = [quotes objectAtIndex:index];
+    
+    if (index > QUOTES_HISTORY_SIZE)
+    {
+        _shiftIsNeeded = YES;
+    }
+    
+    return result;
 }
 @end

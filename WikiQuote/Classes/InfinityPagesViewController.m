@@ -187,23 +187,26 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-	if(_scrollView.contentOffset.x > _scrollView.frame.size.width)
+	if (_scrollView.contentOffset.x > _scrollView.frame.size.width)
     {
-        _previosIndex++;
-		_currentIndex++;
-		_nextIndex++;
+        _previosIndex = (_previosIndex == QUOTES_HISTORY_SIZE - 1) ? QUOTES_HISTORY_SIZE - 1 : _previosIndex + 1;
+		_currentIndex = (_currentIndex == QUOTES_HISTORY_SIZE) ? QUOTES_HISTORY_SIZE : _currentIndex + 1;
+		_nextIndex = (_nextIndex == QUOTES_HISTORY_SIZE + 1) ? QUOTES_HISTORY_SIZE + 1: _nextIndex + 1;
+
+        [self loadPageByIndex:_previosIndex onPage:PAGE_PREVIOS];
+        [self loadPageByIndex:_currentIndex onPage:PAGE_CURRENT];
+        [self loadPageByIndex:_nextIndex onPage:PAGE_NEXT];
 	}
-	if(_scrollView.contentOffset.x < _scrollView.frame.size.width) 
+	if (_scrollView.contentOffset.x < _scrollView.frame.size.width)
     {
 		_previosIndex = (_previosIndex == -1) ? -1 : _previosIndex - 1;
 		_currentIndex = (_currentIndex == 0) ? 0 : _currentIndex - 1;
 		_nextIndex = (_nextIndex == 1) ? 1 : _nextIndex - 1;
+        
+        [self loadPageByIndex:_previosIndex onPage:PAGE_PREVIOS];
+        [self loadPageByIndex:_currentIndex onPage:PAGE_CURRENT];
+        [self loadPageByIndex:_nextIndex onPage:PAGE_NEXT];
 	}
-	
-    [self loadPageByIndex:_previosIndex onPage:PAGE_PREVIOS];
-    [self loadPageByIndex:_currentIndex onPage:PAGE_CURRENT];
-    [self loadPageByIndex:_nextIndex onPage:PAGE_NEXT];
-    
 	// reset offset back to middle page
 	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
 }
@@ -275,8 +278,10 @@
 
 - (void) sendToTweetter:(Quote *) quote
 {
+    NSString *text = [quote.text substringToIndex:(140 - 5 - [quote.author length])];
+    
     TWTweetComposeViewController *tweeter = [[TWTweetComposeViewController alloc] init];
-    [tweeter setInitialText:[NSString stringWithFormat:@"%@ - %@", quote.text, quote.author]];
+    [tweeter setInitialText:[NSString stringWithFormat:@"%@...(%@)", text, quote.author]];
     [self presentModalViewController:tweeter animated:YES];
     [tweeter release];
 }
@@ -287,7 +292,7 @@
     [controller.navigationBar setTintColor:[UIUtils colorFromHexString:@"#55707d"]];
     [controller setMailComposeDelegate:self];
     [controller setSubject:@"WikiQuoter"];
-    [controller setMessageBody:[NSString stringWithFormat:@"%@ <br/> (%@)", quote.text, quote.author] isHTML:YES];
+    [controller setMessageBody:[NSString stringWithFormat:@"%@<br/>-(%@)", quote.text, quote.author] isHTML:YES];
     [self presentModalViewController:controller animated:YES];
     [controller release];
 }
@@ -321,7 +326,7 @@
     } 
     else 
     {
-        NSString *text = [NSString stringWithFormat:@"%@ - %@", quote.text, quote.author];
+        NSString *text = [NSString stringWithFormat:@"%@...(%@)", quote.text, quote.author];
         
         
         // Create the parameters dictionary that will keep the data that will be posted.

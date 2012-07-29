@@ -178,7 +178,6 @@
 {
     self.quote = [self.wikiQuoter getByIndex:index];
     
-    // TODO:yukan improve code  
     if ([self.quote.text isEqual:@""])
     {
         [self.indicator startAnimating];
@@ -188,7 +187,7 @@
         [self.indicator stopAnimating];
     }
     
-    [self.label setTitle:[NSString stringWithFormat:@"%i %@", index, self.quote.author] forState:UIControlStateNormal];
+    [self.label setTitle:self.quote.author forState:UIControlStateNormal];
     [self.textView setText:self.quote.text];
 }
 

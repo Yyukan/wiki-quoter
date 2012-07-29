@@ -31,12 +31,6 @@
     return self;
 }
 
-+ (Quote *) quoteWithText:(NSString *)text fromAuthor:(NSString *)author
-{
-    Quote *quote = [[Quote alloc] initWithText:text author:author identifier:nil description:nil];
-    return [quote autorelease];
-}
-
 - (void) dealloc
 {
     [_text release];
@@ -47,5 +41,14 @@
     [super dealloc];
 }
 
++ (Quote *) quoteWithText:(NSString *)text fromAuthor:(NSString *)author
+{
+    return [[[Quote alloc] initWithText:text author:author identifier:nil description:nil] autorelease];
+}
+
++ (Quote *) emptyQuote
+{
+    return [[[Quote alloc] initWithText:@"" author:@"" identifier:@"" description:@""] autorelease];
+}
 
 @end

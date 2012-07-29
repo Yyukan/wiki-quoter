@@ -153,7 +153,6 @@
 
 - (NSString *) cleanTitle:(NSString *)text
 {
-    // TODO:yukan perform title cleaning
     return text;
 }
 

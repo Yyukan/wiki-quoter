@@ -24,5 +24,5 @@
 - (id)initWithText:(NSString*)text author:(NSString*)author identifier:(NSString*)identifier description:(NSString*)description;
 
 + (Quote *) quoteWithText:(NSString *)text fromAuthor:(NSString *)author;
-
++ (Quote *) emptyQuote;
 @end

@@ -13,9 +13,6 @@
 #define LANG_RU @"ru"
 #define LANG_EN @"en"
 
-#define LANG_RU_INDEX @"ru_index"
-#define LANG_EN_INDEX @"en_index"
-
 #define WIKI_PAGES_COUNT 1
 #define QUOTES_HISTORY_SIZE 10
 
@@ -29,6 +26,8 @@
 {
     NSMutableData *responseData;
 	NSURL *baseURL;
+    
+    BOOL _shiftIsNeeded;
 }
 
 @property (nonatomic, retain) NSMutableDictionary *langToQuotes;
