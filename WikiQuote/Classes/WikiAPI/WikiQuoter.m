@@ -158,7 +158,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(WikiQuoter)
         _shiftIsNeeded = NO;
     }
     
-    TRC_DBG(@"Requested index %i", index);
+    TRC_DBG(@"Requested index [%i] size [%i]", index, size);
     Quote *result = [quotes objectAtIndex:index];
     
     if (index > QUOTES_HISTORY_SIZE)
