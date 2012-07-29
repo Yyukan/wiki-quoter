@@ -15,6 +15,10 @@
 		F42936A0156FF0250034F723 /* QuoteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F429369F156FF0250034F723 /* QuoteViewController.xib */; };
 		F42936A8156FF6970034F723 /* v_frame_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A6156FF6970034F723 /* v_frame_iphone.png */; };
 		F42936AA156FFA070034F723 /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F42936A9156FFA070034F723 /* background@2x.png */; };
+		F43DA53015C54F9B00C7CEFD /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F43DA52F15C54F9B00C7CEFD /* Default@2x.png */; };
+		F43DA53215C54FEF00C7CEFD /* Default-Landscape@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F43DA53115C54FEF00C7CEFD /* Default-Landscape@2x.png */; };
+		F43DA53415C550F200C7CEFD /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = F43DA53315C550F200C7CEFD /* Default.png */; };
+		F43DA53615C551C200C7CEFD /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = F43DA53515C551C200C7CEFD /* Default-Landscape.png */; };
 		F45F3FCD156EACD90077D01C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCC156EACD90077D01C /* UIKit.framework */; };
 		F45F3FCF156EACD90077D01C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FCE156EACD90077D01C /* Foundation.framework */; };
 		F45F3FD1156EACD90077D01C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F45F3FD0156EACD90077D01C /* CoreGraphics.framework */; };
@@ -89,6 +93,10 @@
 		F429369F156FF0250034F723 /* QuoteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QuoteViewController.xib; sourceTree = "<group>"; };
 		F42936A6156FF6970034F723 /* v_frame_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = v_frame_iphone.png; sourceTree = "<group>"; };
 		F42936A9156FFA070034F723 /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
+		F43DA52F15C54F9B00C7CEFD /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../../../Default@2x.png"; sourceTree = "<group>"; };
+		F43DA53115C54FEF00C7CEFD /* Default-Landscape@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape@2x.png"; path = "../../../Default-Landscape@2x.png"; sourceTree = "<group>"; };
+		F43DA53315C550F200C7CEFD /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../../../Default.png; sourceTree = "<group>"; };
+		F43DA53515C551C200C7CEFD /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape.png"; path = "../../../Default-Landscape.png"; sourceTree = "<group>"; };
 		F45F3FC8156EACD90077D01C /* WikiQuote.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WikiQuote.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F45F3FCC156EACD90077D01C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F45F3FCE156EACD90077D01C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -221,6 +229,10 @@
 		F42936A5156FF6970034F723 /* Splashes */ = {
 			isa = PBXGroup;
 			children = (
+				F43DA53515C551C200C7CEFD /* Default-Landscape.png */,
+				F43DA53115C54FEF00C7CEFD /* Default-Landscape@2x.png */,
+				F43DA53315C550F200C7CEFD /* Default.png */,
+				F43DA52F15C54F9B00C7CEFD /* Default@2x.png */,
 			);
 			path = Splashes;
 			sourceTree = "<group>";
@@ -503,6 +515,10 @@
 				F4B454DA15A06C2300CD82F4 /* twitter_iphone.png in Resources */,
 				F4B454DC15A0781300CD82F4 /* lang_button.png in Resources */,
 				F4B58ACA15AE022500E1A914 /* FBDialog.bundle in Resources */,
+				F43DA53015C54F9B00C7CEFD /* Default@2x.png in Resources */,
+				F43DA53215C54FEF00C7CEFD /* Default-Landscape@2x.png in Resources */,
+				F43DA53415C550F200C7CEFD /* Default.png in Resources */,
+				F43DA53615C551C200C7CEFD /* Default-Landscape.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

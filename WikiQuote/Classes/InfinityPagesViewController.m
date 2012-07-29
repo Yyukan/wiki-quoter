@@ -278,7 +278,13 @@
 
 - (void) sendToTweetter:(Quote *) quote
 {
-    NSString *text = [quote.text substringToIndex:(140 - 5 - [quote.author length])];
+    int quoteMaximumLength = (140 - 5 - [quote.author length]);
+    
+    NSString *text = quote.text;
+    if ([text length] > quoteMaximumLength)
+    {
+        text = [quote.text substringToIndex:quoteMaximumLength];
+    }
     
     TWTweetComposeViewController *tweeter = [[TWTweetComposeViewController alloc] init];
     [tweeter setInitialText:[NSString stringWithFormat:@"%@...(%@)", text, quote.author]];
@@ -292,7 +298,7 @@
     [controller.navigationBar setTintColor:[UIUtils colorFromHexString:@"#55707d"]];
     [controller setMailComposeDelegate:self];
     [controller setSubject:@"WikiQuoter"];
-    [controller setMessageBody:[NSString stringWithFormat:@"%@<br/>-(%@)", quote.text, quote.author] isHTML:YES];
+    [controller setMessageBody:[NSString stringWithFormat:@"%@...<br/>(%@)", quote.text, quote.author] isHTML:YES];
     [self presentModalViewController:controller animated:YES];
     [controller release];
 }
