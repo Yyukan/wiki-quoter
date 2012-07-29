@@ -55,11 +55,11 @@
     
     if (success)
     {
-        NSLog(@"Parsed successfully xml of size [%i] bytes", [xml length]);
+        TRC_DBG(@"Parsed successfully xml of size [%i] bytes", [xml length]);
     }    
     else
     {
-        NSLog(@"Error parsing xml of size [%i] bytes", [xml length]);
+        TRC_DBG(@"Error parsing xml of size [%i] bytes", [xml length]);
     }    
 
     return self.quotes;
