@@ -341,7 +341,7 @@
         
         // Create the parameters dictionary that will keep the data that will be posted.
         NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       @"WikiQuoter app for iPhone!", @"caption",
+                                       @"WikiQuoter application", @"caption",
                                        text, @"message",
                                        nil];
         

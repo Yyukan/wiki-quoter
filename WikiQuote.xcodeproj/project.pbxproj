@@ -245,7 +245,6 @@
 		F45F3FBD156EACD90077D01C = {
 			isa = PBXGroup;
 			children = (
-				F4B642AF15C6FF93006F34D9 /* AudioToolbox.framework */,
 				F45F3FD2156EACD90077D01C /* WikiQuote */,
 				F4F3B20D1577F407007AE88E /* WikiQuoteTests */,
 				F45F3FCB156EACD90077D01C /* Frameworks */,
@@ -265,6 +264,7 @@
 		F45F3FCB156EACD90077D01C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F4B642AF15C6FF93006F34D9 /* AudioToolbox.framework */,
 				F4253C5015A619DE00EAA4E8 /* MessageUI.framework */,
 				F4253C4D15A617F200EAA4E8 /* Twitter.framework */,
 				F45F3FCC156EACD90077D01C /* UIKit.framework */,
