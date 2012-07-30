@@ -5,6 +5,7 @@
 //  Created by Oleksandr Shtykhno on 24/05/2012.
 //  Copyright (c) 2012 shtykhno.net. All rights reserved.
 //
+#import <AudioToolbox/AudioToolbox.h>
 #import <Twitter/Twitter.h>
 #import <MessageUI/MessageUI.h>
 #import <UIKit/UIKit.h>
@@ -21,6 +22,8 @@
     int _previosIndexEn;
     int _currentIndexEn;
     int _nextIndexEn;
+    
+    SystemSoundID mailSentSound;
 }
 @property (nonatomic, retain) QuoteViewController *previosView;
 @property (nonatomic, retain) QuoteViewController *currentView;

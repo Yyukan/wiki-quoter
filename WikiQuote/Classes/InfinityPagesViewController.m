@@ -20,6 +20,7 @@
 
 @synthesize previosView = _previosView;
 @synthesize currentView = _currentView;
+
 @synthesize nextView = _nextView;
 
 @synthesize previosIndex = _previosIndex;
@@ -135,6 +136,10 @@
 	[self loadPageByIndex:self.currentIndex onPage:PAGE_CURRENT];
     // load next page
 	[self loadPageByIndex:self.nextIndex onPage:PAGE_NEXT];
+    
+    // load sound file to notify about facebook posting
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"mail-sent" ofType:@"caf"];
+    AudioServicesCreateSystemSoundID((CFURLRef) [NSURL fileURLWithPath:path], &mailSentSound);
 }
 
 - (void)viewDidUnload 
@@ -278,7 +283,7 @@
 
 - (void) sendToTweetter:(Quote *) quote
 {
-    int quoteMaximumLength = (140 - 5 - [quote.author length]);
+    int quoteMaximumLength = (140 - 3 - [quote.author length]);
     
     NSString *text = quote.text;
     if ([text length] > quoteMaximumLength)
@@ -287,7 +292,7 @@
     }
     
     TWTweetComposeViewController *tweeter = [[TWTweetComposeViewController alloc] init];
-    [tweeter setInitialText:[NSString stringWithFormat:@"%@...(%@)", text, quote.author]];
+    [tweeter setInitialText:[NSString stringWithFormat:@"%@ (%@)", text, quote.author]];
     [self presentModalViewController:tweeter animated:YES];
     [tweeter release];
 }
@@ -298,7 +303,7 @@
     [controller.navigationBar setTintColor:[UIUtils colorFromHexString:@"#55707d"]];
     [controller setMailComposeDelegate:self];
     [controller setSubject:@"WikiQuoter"];
-    [controller setMessageBody:[NSString stringWithFormat:@"%@...<br/>(%@)", quote.text, quote.author] isHTML:YES];
+    [controller setMessageBody:[NSString stringWithFormat:@"%@<br/>(%@)", quote.text, quote.author] isHTML:YES];
     [self presentModalViewController:controller animated:YES];
     [controller release];
 }
@@ -308,9 +313,8 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)doSendToFacebook:(NSDictionary *)dictionary 
+- (void)doSendToFacebook:(NSMutableDictionary *)parameters
 {
-    NSMutableDictionary *parameters = [dictionary objectForKey:@"parameters"];
     NSString *encodedToken = [self.facebook.accessToken stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *graphPath = [NSString stringWithFormat:@"me/feed?access_token=%@", encodedToken];
     [self.facebook requestWithGraphPath:graphPath
@@ -332,15 +336,13 @@
     } 
     else 
     {
-        NSString *text = [NSString stringWithFormat:@"%@...(%@)", quote.text, quote.author];
+        NSString *text = [NSString stringWithFormat:@"%@ (%@)", quote.text, quote.author];
         
         
         // Create the parameters dictionary that will keep the data that will be posted.
         NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       @"My test app", @"name",
-                                       @"WikiQuote app for iPhone!", @"caption",
-                                       @"This is a description of my app", @"description",
-                                       text, @"message",              
+                                       @"WikiQuoter app for iPhone!", @"caption",
+                                       text, @"message",
                                        nil];
         
         [self doSendToFacebook:parameters];
@@ -405,17 +407,15 @@
     if ([result objectForKey:@"id"]) {
         
         // If the result contains the "id" key then the data have been posted and the id of the published post have been returned.
-        UIAlertView *al = [[UIAlertView alloc] initWithTitle:@"My test app" message:@"Your message has been posted on your wall!" 
-                                                    delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-        [al show];
-        [al release];
+        AudioServicesPlaySystemSound(mailSentSound);
     }
 }
 
 
 -(void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
-    NSLog(@"%@", [error localizedDescription]);
+    TRC_DBG(@"Error description: %@", [error localizedDescription]);
+    TRC_DBG(@"Error details: %@", [error description]);
 }
 
 
