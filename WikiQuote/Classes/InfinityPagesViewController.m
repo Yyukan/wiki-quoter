@@ -28,6 +28,7 @@
 @synthesize nextIndex = _nextIndex;
 
 @synthesize facebook = _facebook;
+@synthesize postponedQuote = _postponedQuote;
 
 - (void) adjustFrame:(QuoteViewController *) controller page:(int)page
 {
@@ -55,6 +56,7 @@
 
 - (void)dealloc 
 {
+    [_postponedQuote release];
     [_facebook release];
     [_previosView release];
     [_currentView release];
@@ -313,8 +315,17 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)doSendToFacebook:(NSMutableDictionary *)parameters
+- (void)doSendToFacebook:(Quote *)quote
 {
+    NSString *text = [NSString stringWithFormat:@"%@ (%@)", quote.text, quote.author];
+    
+    
+    // Create the parameters dictionary that will keep the data that will be posted.
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                       @"WikiQuoter application", @"caption",
+                                       text, @"message",
+                                       nil];
+    
     NSString *encodedToken = [self.facebook.accessToken stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *graphPath = [NSString stringWithFormat:@"me/feed?access_token=%@", encodedToken];
     [self.facebook requestWithGraphPath:graphPath
@@ -331,21 +342,11 @@
     {
         // if user is not logged in
         [self.facebook authorize:[NSArray arrayWithObjects:@"read_stream", @"publish_stream", nil]];
-        
-        
-    } 
+        self.postponedQuote = quote;
+    }
     else 
     {
-        NSString *text = [NSString stringWithFormat:@"%@ (%@)", quote.text, quote.author];
-        
-        
-        // Create the parameters dictionary that will keep the data that will be posted.
-        NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                       @"WikiQuoter application", @"caption",
-                                       text, @"message",
-                                       nil];
-        
-        [self doSendToFacebook:parameters];
+        [self doSendToFacebook:quote];
     }
 }
 
@@ -358,6 +359,8 @@
     [defaults setObject:[self.facebook accessToken] forKey:@"FBAccessTokenKey"];
     [defaults setObject:[self.facebook expirationDate] forKey:@"FBExpirationDateKey"];
     [defaults synchronize];
+    
+    [self doSendToFacebook:self.postponedQuote];
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled

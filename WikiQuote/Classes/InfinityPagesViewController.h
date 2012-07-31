@@ -36,5 +36,5 @@
 
 /** facebook property */
 @property (nonatomic, retain) Facebook *facebook;
-
+@property (nonatomic, retain) Quote *postponedQuote;
 @end
