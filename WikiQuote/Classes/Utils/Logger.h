@@ -13,7 +13,7 @@
 #if TARGET_IPHONE_SIMULATOR != 0
 #define TRC_LEVEL 0
 #else
-#define TRC_LEVEL 0 // change to 0 to be able debug on device
+#define TRC_LEVEL 5 // change to 0 to be able debug on device
 #endif
 #endif
 
