@@ -69,6 +69,7 @@
 		F4B58ADF15AE022500E1A914 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B58AC715AE022500E1A914 /* SBJsonWriter.m */; };
 		F4B642B015C6FF93006F34D9 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B642AF15C6FF93006F34D9 /* AudioToolbox.framework */; };
 		F4B642B415C703D0006F34D9 /* mail-sent.caf in Resources */ = {isa = PBXBuildFile; fileRef = F4B642B315C703D0006F34D9 /* mail-sent.caf */; };
+		F4BE8C60162DEC1900C3A2AB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F4BE8C5F162DEC1900C3A2AB /* Default-568h@2x.png */; };
 		F4C48DA81588FD6600528F1D /* WikiQuoteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */; };
 		F4C48DA91588FD6600528F1D /* WikiQuoteParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */; };
 		F4DEDF681574006500BD77CB /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = F4DEDF671574006500BD77CB /* Logger.m */; };
@@ -154,6 +155,7 @@
 		F4B58AC715AE022500E1A914 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		F4B642AF15C6FF93006F34D9 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		F4B642B315C703D0006F34D9 /* mail-sent.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "mail-sent.caf"; path = "Resources/mail-sent.caf"; sourceTree = "<group>"; };
+		F4BE8C5F162DEC1900C3A2AB /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F4C48DA61588FD6600528F1D /* WikiQuoteParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WikiQuoteParser.h; path = WikiAPI/WikiQuoteParser.h; sourceTree = "<group>"; };
 		F4C48DA71588FD6600528F1D /* WikiQuoteParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WikiQuoteParser.m; path = WikiAPI/WikiQuoteParser.m; sourceTree = "<group>"; };
 		F4DEDF661574006500BD77CB /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		F45F3FBD156EACD90077D01C = {
 			isa = PBXGroup;
 			children = (
+				F4BE8C5F162DEC1900C3A2AB /* Default-568h@2x.png */,
 				F45F3FD2156EACD90077D01C /* WikiQuote */,
 				F4F3B20D1577F407007AE88E /* WikiQuoteTests */,
 				F45F3FCB156EACD90077D01C /* Frameworks */,
@@ -485,7 +488,7 @@
 		F45F3FBF156EACD90077D01C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0440;
+				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = shtykhno.net;
 			};
 			buildConfigurationList = F45F3FC2156EACD90077D01C /* Build configuration list for PBXProject "WikiQuote" */;
@@ -535,6 +538,7 @@
 				F43DA53415C550F200C7CEFD /* Default.png in Resources */,
 				F43DA53615C551C200C7CEFD /* Default-Landscape.png in Resources */,
 				F4B642B415C703D0006F34D9 /* mail-sent.caf in Resources */,
+				F4BE8C60162DEC1900C3A2AB /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
