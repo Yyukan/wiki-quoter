@@ -34,7 +34,7 @@
 {
     CGRect frame = self.scrollView.frame;
     frame.origin.x = frame.size.width * page;
-    frame.origin.y = 0;
+    frame.origin.y = 0;    
     controller.view.frame = frame;
 }
 
@@ -220,21 +220,21 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    [self adjustFrame:self.previosView page:PAGE_PREVIOS];
-    [self adjustFrame:self.currentView page:PAGE_CURRENT];
-    [self adjustFrame:self.nextView page:PAGE_NEXT];
-    
-    [self.currentView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-    [self.previosView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-    [self.nextView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+//    [self adjustFrame:self.previosView page:PAGE_PREVIOS];
+//    [self adjustFrame:self.currentView page:PAGE_CURRENT];
+//    [self adjustFrame:self.nextView page:PAGE_NEXT];
+//    
+//    [self.currentView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+//    [self.previosView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+//    [self.nextView shouldAutorotateToInterfaceOrientation:interfaceOrientation];
+//
+//    // adjust content size for three pages
+//	[_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width * 3, _scrollView.frame.size.height)];	
+//    
+//    // reposition to central page
+//	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
 
-    // adjust content size for three pages
-	[_scrollView setContentSize:CGSizeMake(_scrollView.frame.size.width * 3, _scrollView.frame.size.height)];	
-    
-    // reposition to central page
-	[_scrollView scrollRectToVisible:CGRectMake(_scrollView.frame.size.width,0,_scrollView.frame.size.width,_scrollView.frame.size.height) animated:NO];
-
-    return YES;
+    return interfaceOrientation == UIInterfaceOrientationPortrait;
 }
 
 - (void)languageHasChanged:(NSString *)language

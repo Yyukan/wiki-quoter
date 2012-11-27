@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define isPhone568 ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone && [UIScreen mainScreen].bounds.size.height == 568)
+
 @interface UIUtils : NSObject
 
 + (void)setBackgroundImage:(UIView *)view image:(NSString *)image;
