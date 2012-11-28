@@ -29,7 +29,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>net.shtykhno.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>net.shtykhno.wquotes</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>

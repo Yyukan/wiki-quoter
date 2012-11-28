@@ -711,10 +711,12 @@
 		F45F3FEA156EACD90077D01C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Oleksandr Shtykhno (K53KK78856)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WikiQuote/WikiQuote-Prefix.pch";
 				INFOPLIST_FILE = "WikiQuote/WikiQuote-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0FCC3A03-31F4-4015-AC34-D1EBABC71161";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -723,10 +725,12 @@
 		F45F3FEB156EACD90077D01C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Oleksandr Shtykhno";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WikiQuote/WikiQuote-Prefix.pch";
 				INFOPLIST_FILE = "WikiQuote/WikiQuote-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8C592361-7E2A-4FCB-9711-EB3491FF6081";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
