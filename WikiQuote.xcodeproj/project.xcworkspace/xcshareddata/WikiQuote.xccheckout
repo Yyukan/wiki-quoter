@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D97348B3-50CF-49F9-A6D9-18EC07D811C0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>WikiQuote</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F9A46DB8F287038529A93C729E4BC1548AFB25D1</key>
+		<string>https://bitbucket.org/yukan/wikiquote.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>WikiQuote.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F9A46DB8F287038529A93C729E4BC1548AFB25D1</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/yukan/wikiquote.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F9A46DB8F287038529A93C729E4BC1548AFB25D1</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F9A46DB8F287038529A93C729E4BC1548AFB25D1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>WikiQuote</string>
+		</dict>
+	</array>
+</dict>
+</plist>
